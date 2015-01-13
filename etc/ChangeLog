@@ -1,3 +1,7 @@
+2015-01-13  Artur Malabarba  <bruce.connor.am@gmail.com>
+
+	* NEWS: Document installing packages from directories.
+
 2015-01-11  Paul Eggert  <eggert@cs.ucla.edu>
 
 	Default to 'configure --enable-silent-rules'
