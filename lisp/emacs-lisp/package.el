@@ -784,6 +784,14 @@ untar into a directory named DIR; otherwise, signal an error."
          (dirname (package-desc-full-name pkg-desc))
 	 (pkg-dir (expand-file-name dirname package-user-dir)))
     (pcase (package-desc-kind pkg-desc)
+      (`dir
+       (make-directory pkg-dir t)
+       (dolist (source-file
+                (directory-files
+                 default-directory 'full "\\`[^.].*\\.el\\'" 'nosort))
+         (let ((target-el-file
+                (expand-file-name (file-name-nondirectory source-file) pkg-dir)))
+           (copy-file source-file target-el-file t))))
       (`tar
        (make-directory package-user-dir t)
        ;; FIXME: should we delete PKG-DIR if it exists?
@@ -1293,13 +1301,24 @@ Return the pkg-desc, with desc-kind set to KIND."
 ;;;###autoload
 (defun package-install-from-buffer ()
   "Install a package from the current buffer.
-The current buffer is assumed to be a single .el or .tar file that follows the
-packaging guidelines; see info node `(elisp)Packaging'.
+The current buffer is assumed to be a single .el or .tar file or
+a directory.  These must follow the packaging guidelines (see
+info node `(elisp)Packaging').
+
+Specially, if current buffer is a directory, the -pkg.el
+description file is not mandatory, in which case the information
+is derived from the main .el file in the directory.
+
 Downloads and installs required packages as needed."
   (interactive)
-  (let ((pkg-desc (if (derived-mode-p 'tar-mode)
-                      (package-tar-file-info)
-                    (package-buffer-info))))
+  (let ((pkg-desc
+         (cond
+          ((derived-mode-p 'dired-mode)
+           (package-dir-info))
+          ((derived-mode-p 'tar-mode)
+           (package-tar-file-info))
+          (t
+           (package-buffer-info)))))
     ;; Download and install the dependencies.
     (let* ((requires (package-desc-reqs pkg-desc))
            (transaction (package-compute-transaction nil requires)))
