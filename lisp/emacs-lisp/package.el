@@ -787,12 +787,18 @@ untar into a directory named DIR; otherwise, signal an error."
     (pcase (package-desc-kind pkg-desc)
       (`dir
        (make-directory pkg-dir t)
-       (dolist (source-file
-                (directory-files
-                 default-directory 'full "\\`[^.].*\\.el\\'" 'nosort))
-         (let ((target-el-file
-                (expand-file-name (file-name-nondirectory source-file) pkg-dir)))
-           (copy-file source-file target-el-file t))))
+       (let ((file-list
+              (directory-files
+               default-directory 'full "\\`[^.].*\\.el\\'" 'nosort)))
+         (dolist (source-file file-list)
+           (let ((target-el-file
+                  (expand-file-name (file-name-nondirectory source-file) pkg-dir)))
+             (copy-file source-file target-el-file t)))
+         ;; Now that the files have been installed, this package is
+         ;; indistinguishable from a `tar' or a `single'. Let's make
+         ;; things simple by ensuring we're one of them.
+         (setf (package-desc-kind pkg-desc)
+               (if (> (length file-list) 1) 'tar 'single))))
       (`tar
        (make-directory package-user-dir t)
        ;; FIXME: should we delete PKG-DIR if it exists?
