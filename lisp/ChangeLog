@@ -1,3 +1,10 @@
+2015-01-14  Artur Malabarba  <bruce.connor.am@gmail.com>
+
+	* emacs-lisp/package-x.el (package-upload-buffer-internal):
+	* emacs-lisp/package.el (package-desc-suffix)
+	(package-install-from-archive): Ensure all remaining instances of
+	`package-desc-kind' handle the 'dir value.
+
 2015-01-13  Artur Malabarba  <bruce.connor.am@gmail.com>
 
 	* emacs-lisp/package.el (package--read-pkg-desc): New
