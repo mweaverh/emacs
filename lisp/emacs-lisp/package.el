@@ -1280,7 +1280,7 @@ The return result is a `package-desc'."
             (insert-file-contents (pop files))
             (if (setq info (ignore-errors (package-buffer-info)))
                 (setq files nil)
-              info)))))))
+              (setf (package-desc-kind info) 'dir))))))))
 
 (defun package--read-pkg-desc (kind)
   "Read a `define-package' form in current buffer.
