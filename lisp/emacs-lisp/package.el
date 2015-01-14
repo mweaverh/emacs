@@ -1324,6 +1324,10 @@ Downloads and installs required packages as needed."
   (let ((pkg-desc
          (cond
           ((derived-mode-p 'dired-mode)
+           ;; This is the only way a package-desc object with a `dir'
+           ;; desc-kind can be created.  Such packages can't be
+           ;; uploaded or installed from archives, they can only be
+           ;; installed from local buffers or directories.
            (package-dir-info))
           ((derived-mode-p 'tar-mode)
            (package-tar-file-info))
