@@ -2764,13 +2764,12 @@ Store this list in `package-menu--new-package-list'."
 
 (defun package-menu--find-and-notify-upgrades ()
   "Notify the user of upgradeable packages."
-  (let ((upgrades (package-menu--find-upgrades)))
-    (if upgrades
-        (message "%d package%s can be upgraded; type `%s' to mark %s for upgrading."
-          (length upgrades)
-          (if (= (length upgrades) 1) "" "s")
-          (substitute-command-keys "\\[package-menu-mark-upgrades]")
-          (if (= (length upgrades) 1) "it" "them")))))
+  (when-let ((upgrades (package-menu--find-upgrades)))
+    (message "%d package%s can be upgraded; type `%s' to mark %s for upgrading."
+      (length upgrades)
+      (if (= (length upgrades) 1) "" "s")
+      (substitute-command-keys "\\[package-menu-mark-upgrades]")
+      (if (= (length upgrades) 1) "it" "them"))))
 
 (defun package-menu--post-refresh ()
   "Function to be called after `package-refresh-contents' is done.
