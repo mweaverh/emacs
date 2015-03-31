@@ -1351,15 +1351,10 @@ If optional arg NO-ACTIVATE is non-nil, don't activate packages."
     (message "Importing %s...done" (file-name-nondirectory file))))
 
 (defvar package--post-download-archives-hook nil
-  "Hook run after the archive contents are downloaded.")
+  "Hook run after the archive contents are downloaded.
+Don't run this hook directly.  It is meant to be run as part of
+`package--update-downloads-in-progress'.")
 (put 'package--post-download-archives-hook 'risky-local-variable t)
-
-(defun package--notify-done ()
-  (message "Package refresh done"))
-
-(add-hook 'package--post-download-archives-hook #'package--notify-done)
-(add-hook 'package--post-download-archives-hook #'package--build-compatibility-table)
-(add-hook 'package--post-download-archives-hook #'package-read-all-archive-contents)
 
 (defun package--update-downloads-in-progress (entry)
   "Remove ENTRY from `package--downloads-in-progress'.
@@ -1369,6 +1364,11 @@ Once it's empty, run `package--post-download-archives-hook'."
         (remove entry package--downloads-in-progress))
   ;; If this was the last download, run the hook.
   (unless package--downloads-in-progress
+    (package--build-compatibility-table)
+    (package-read-all-archive-contents)
+    ;; We message before running the hook, so the hook can give
+    ;; messages as well.
+    (message "Package refresh done")
     (run-hooks 'package--post-download-archives-hook)))
 
 (defun package--download-one-archive (archive file &optional async)
@@ -1408,16 +1408,14 @@ similar to an entry in `package-alist'.  Save the cached copy to
   "Download descriptions of all `package-archives' and read them.
 This populates `package-archive-contents'.  If ASYNC is non-nil,
 the downloads are performed asynchronously."
-  (when async
-    (setq package--downloads-in-progress package-archives))
+  ;; The dowloaded archive contents will be read as part of
+  ;; `package--update-downloads-in-progress'.
+  (setq package--downloads-in-progress package-archives)
   (dolist (archive package-archives)
     (condition-case-unless-debug nil
         (package--download-one-archive archive "archive-contents" async)
       (error (message "Failed to download `%s' archive."
-               (car archive)))))
-  ;; This is what reads the dowloaded archive contents.
-  (unless async
-    (run-hooks 'package--post-download-archives-hook)))
+               (car archive))))))
 
 ;;;###autoload
 (defun package-refresh-contents (&optional async)
@@ -2764,14 +2762,6 @@ Store this list in `package-menu--new-package-list'."
         (push (car elt) package-menu--new-package-list)))
     (setq package-menu--old-archive-contents nil)))
 
-(defun package-menu--revert ()
-  "Call `revert-buffer' on the *Packages* buffer.
-Used in `package--post-download-archives-hook'."
-  (let ((buf (get-buffer "*Packages*")))
-    (when (buffer-live-p buf)
-      (with-current-buffer buf
-        (revert-buffer nil 'noconfirm)))))
-
 (defun package-menu--find-and-notify-upgrades ()
   "Notify the user of upgradeable packages."
   (let ((upgrades (package-menu--find-upgrades)))
@@ -2781,6 +2771,19 @@ Used in `package--post-download-archives-hook'."
           (if (= (length upgrades) 1) "" "s")
           (substitute-command-keys "\\[package-menu-mark-upgrades]")
           (if (= (length upgrades) 1) "it" "them")))))
+
+(defun package-menu--post-refresh ()
+  "Function to be called after `package-refresh-contents' is done.
+Checks for new packages, reverts the *Packages* buffer, and
+checks for upgrades.
+This goes in `package--post-download-archives-hook', so that it
+works with async refresh as well."
+  (package-menu--populate-new-package-list)
+  (let ((buf (get-buffer "*Packages*")))
+    (when (buffer-live-p buf)
+      (with-current-buffer buf
+        (revert-buffer nil 'noconfirm))))
+  (package-menu--find-and-notify-upgrades))
 
 (defcustom package-menu-async t
   "If non-nil, package-menu will use async operations when possible.
@@ -2803,11 +2806,7 @@ The list is displayed in a buffer named `*Packages*'."
     (package-initialize t))
   ;; Integrate the package-menu with updating the archives.
   (add-hook 'package--post-download-archives-hook
-            #'package-menu--populate-new-package-list 'append)
-  (add-hook 'package--post-download-archives-hook
-            #'package-menu--revert 'append)
-  (add-hook 'package--post-download-archives-hook
-            #'package-menu--find-and-notify-upgrades 'append)
+            #'package-menu--post-refresh)
 
   (unless no-fetch
     (setq package-menu--old-archive-contents package-archive-contents)
