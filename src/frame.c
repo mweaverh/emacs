@@ -3517,7 +3517,7 @@ x_set_line_spacing (struct frame *f, Lisp_Object new_value, Lisp_Object old_valu
 void
 x_set_screen_gamma (struct frame *f, Lisp_Object new_value, Lisp_Object old_value)
 {
-  Lisp_Object bgcolor, frame;
+  Lisp_Object bgcolor;
 
   if (NILP (new_value))
     f->gamma = 0;
