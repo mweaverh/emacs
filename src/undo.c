@@ -293,63 +293,9 @@ but another undo command will undo to the previous boundary.  */)
   last_boundary_position = PT;
   last_boundary_buffer = current_buffer;
 
-  Fset (Qundo_last_boundary,Qnil);
+  Fset (Qundo_last_boundary, Qexplicit);
   return Qnil;
 }
-
-DEFUN ("undo-size", Fundo_size, Sundo_size, 0, 1, 0,
-       doc: /* Return the size of `buffer-undo-list'.
-
-If n count till the end of the nth boundary, or the whole list iff n
-is zero.
-
-Returns nil if `buffer-undo-list' is t; that is there is no undo list.
-Otherwise, returns the size of `buffer-undo-list' in bytes.*/)
-     (Lisp_Object n)
-{
-  /* We do not have an undo_list anyway.*/
-  if (EQ (BVAR (current_buffer, undo_list), Qt))
-    return Qnil;
-
-  Lisp_Object prev, next;
-  EMACS_INT size_so_far = 0, boundary_so_far = 0, num = 0;
-  if( ! NILP( n ) )
-    {
-      CHECK_NUMBER(n);
-      num = XINT(n);
-    }
-
-  prev = Qnil;
-  next = BVAR (current_buffer, undo_list);
-
-  while(CONSP (next))
-    {
-      Lisp_Object elt;
-      elt = XCAR (next);
-
-      size_so_far += sizeof (struct Lisp_Cons);
-      if (CONSP (elt))
-        {
-          /* We have a boundary, so check we do not have too many.*/
-          if (NILP (elt))
-            {
-              boundary_so_far = boundary_so_far + 1;
-              if(boundary_so_far >= num)
-                break;
-            }
-
-          if (STRINGP (XCAR (elt)))
-            size_so_far += (sizeof (struct Lisp_String) - 1
-                            + SCHARS (XCAR (elt)));
-        }
-
-      /* and advance */
-      prev = next;
-      next = XCDR (next);
-    }
-
-  return make_number (size_so_far);
- }
 
 /* At garbage collection time, make an undo list shorter at the end,
    returning the truncated list.  How this is done depends on the
@@ -492,6 +438,7 @@ syms_of_undo (void)
   DEFSYM (Qinhibit_read_only, "inhibit-read-only");
   DEFSYM (Qundo__undoable_change, "undo--undoable-change");
   DEFSYM (Qundo_last_boundary, "undo-last-boundary");
+  DEFSYM (Qexplicit, "explicit");
 
   /* Marker for function call undo list elements.  */
   DEFSYM (Qapply, "apply");
@@ -501,7 +448,6 @@ syms_of_undo (void)
 
   last_boundary_buffer = NULL;
 
-  defsubr (&Sundo_size);
   defsubr (&Sundo_boundary);
 
   DEFVAR_INT ("undo-limit", undo_limit,

@@ -2245,6 +2245,7 @@ as an argument limits undo to changes within the current region."
     ;; the next command should not be a "consecutive undo".
     ;; So set `this-command' to something other than `undo'.
     (setq this-command 'undo-start)
+
     (unless (and (eq last-command 'undo)
 		 (or (eq pending-undo-list t)
 		     ;; If something (a timer or filter?) changed the buffer
@@ -2761,7 +2762,7 @@ with < or <= based on USE-<."
 (defvar-local undo-last-boundary nil
   "Describe the cause of the last undo-boundary.
 
-If nil, the last boundary was caused by an explicit call to
+If 'explicit, the last boundary was caused by an explicit call to
 `undo-boundary', that is one not called by the code in this
 section.
 
@@ -2784,8 +2785,8 @@ If set to non-nil, this will effectively disable the timer.")
 
 (defvar undo--this-command-amalgamating nil
   "Non-nil if `this-command' should be amalgamated.
-This variable is set to nil by the command loop and is set by
-`undo--auto-pre-amalgamating-command'." )
+This variable is set to nil by `undo--auto-boundary' and is set
+by `undo-auto--amalgamate'." )
 
 (defun undo--needs-boundary-p ()
   "Return non-nil if `buffer-undo-list' needs a boundary at the start."
@@ -2855,9 +2856,10 @@ See also `undo--buffer-undoably-changed'.")
     (undo--auto-boundary
      (if undo--this-command-amalgamating
          'amalgamate
-       'command))))
+       'command)))
+  (setq undo--this-command-amalgamating nil))
 
-(defun undo--auto-pre-amalgamating-command ()
+(defun undo-auto--amalgamate ()
   "Amalgamate undo if necessary.
 This function is called before `self-insert-command', and removes
 the previous `undo-boundary' if a series of `self-insert-command'

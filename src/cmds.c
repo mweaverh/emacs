@@ -235,7 +235,7 @@ because it respects values of `delete-active-region' and `overwrite-mode'.  */)
   CHECK_NUMBER (n);
 
   if (abs (XINT (n)) < 2)
-    call0(Qundo__auto_pre_amalgamating_command);
+    call0 (Qundo_auto__amalgamate);
 
   pos = PT + XINT (n);
   if (NILP (killflag))
@@ -281,7 +281,7 @@ At the end, it runs `post-self-insert-hook'.  */)
     error ("Negative repetition argument %"pI"d", XFASTINT (n));
 
   if (XFASTINT (n) < 2)
-    call0 (Qundo__auto_pre_amalgamating_command);
+    call0 (Qundo_auto__amalgamate);
 
   /* Barf if the key that invoked this was not a character.  */
   if (!CHARACTERP (last_command_event))
@@ -290,6 +290,8 @@ At the end, it runs `post-self-insert-hook'.  */)
     int character = translate_char (Vtranslation_table_for_input,
 				    XINT (last_command_event));
     int val = internal_self_insert (character, XFASTINT (n));
+    if (val==2)
+      Fset (Qundo__this_command_amalgamating, Qnil);
     frame_make_pointer_invisible (SELECTED_FRAME ());
   }
 
@@ -494,8 +496,8 @@ internal_self_insert (int c, EMACS_INT n)
 void
 syms_of_cmds (void)
 {
-  DEFSYM (Qundo__auto_pre_amalgamating_command,
-          "undo--auto-pre-amalgamating-command" );
+  DEFSYM (Qundo_auto__amalgamate,
+          "undo-auto--amalgamate" );
 
   DEFSYM (Qkill_forward_chars, "kill-forward-chars");
 

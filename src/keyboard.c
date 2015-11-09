@@ -1344,10 +1344,6 @@ command_loop_1 (void)
       while (pending_malloc_warning)
 	display_malloc_warning ();
 
-      /* Ensure that we have added appropriate undo-boundaries as a
-         result of changes from the last command. */
-      call0 (Qundo__auto_add_boundary);
-
       Vdeactivate_mark = Qnil;
 
       /* Don't ignore mouse movements for more than a single command
@@ -1506,7 +1502,9 @@ command_loop_1 (void)
               }
 #endif
 
-            Fset (Qundo__this_command_amalgamating, Qnil);
+            /* Ensure that we have added appropriate undo-boundaries as a
+               result of changes from the last command. */
+            call0 (Qundo__auto_add_boundary);
 
             call1 (Qcommand_execute, Vthis_command);
 
@@ -11090,7 +11088,6 @@ syms_of_keyboard (void)
   DEFSYM (Qpre_command_hook, "pre-command-hook");
   DEFSYM (Qpost_command_hook, "post-command-hook");
 
-  DEFSYM (Qundo__this_command_amalgamating, "undo--this-command-amalgamating");
   DEFSYM (Qundo__auto_add_boundary, "undo--auto-add-boundary");
 
   DEFSYM (Qdeferred_action_function, "deferred-action-function");
