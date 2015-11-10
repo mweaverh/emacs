@@ -2759,17 +2759,17 @@ with < or <= based on USE-<."
 ;; This section adds a new undo-boundary at either after a command is
 ;; called or in some cases on a timer called after a change is made in
 ;; any buffer.
-(defvar-local undo-last-boundary nil
+(defvar-local undo-auto--last-boundary-cause nil
   "Describe the cause of the last undo-boundary.
 
-If 'explicit, the last boundary was caused by an explicit call to
+If `explicit', the last boundary was caused by an explicit call to
 `undo-boundary', that is one not called by the code in this
 section.
 
-If it is equal to 'timer, then the last boundary was inserted
-by `undo-auto-boundary-timer'.
+If it is equal to `timer', then the last boundary was inserted
+by `undo-auto--boundary-timer'.
 
-If it is equal to 'command, then the last boundary was inserted
+If it is equal to `command', then the last boundary was inserted
 automatically after a command, that is by the code defined in
 this section.
 
@@ -2778,103 +2778,100 @@ an amalgamating command. The car of the list is the number of
 times a amalgamating command has been called, and the cdr are the
 buffers that were changed during the last command.")
 
-(defvar undo-auto-current-boundary-timer nil
-  "Current timer which will run `undo-auto-boundary-timer' or nil.
+(defvar undo-auto--current-boundary-timer nil
+  "Current timer which will run `undo-auto--boundary-timer' or nil.
 
 If set to non-nil, this will effectively disable the timer.")
 
-(defvar undo--this-command-amalgamating nil
+(defvar undo-auto--this-command-amalgamating nil
   "Non-nil if `this-command' should be amalgamated.
-This variable is set to nil by `undo--auto-boundary' and is set
+This variable is set to nil by `undo-auto--boundary' and is set
 by `undo-auto--amalgamate'." )
 
-(defun undo--needs-boundary-p ()
+(defun undo-auto--needs-boundary-p ()
   "Return non-nil if `buffer-undo-list' needs a boundary at the start."
   (car-safe buffer-undo-list))
 
-(defun undo--last-boundary-amalgamating-p ()
-  "Return non-nil if the last boundary was from an amalgamating command.
-Amalgamating commands are either `self-insert-command' and
-`delete-char'.  The return value is actual number of times one of
-these commands have been run if non-nil."
-  (car-safe undo-last-boundary))
+(defun undo-auto--last-boundary-amalgamating-number ()
+  "Return the number of amalgamating last commands or nil.
+Amalgamating commands are, by default, either
+`self-insert-command' and `delete-char', but can be any command
+that calls `undo-auto--amalgamate'."
+  (car-safe undo-auto--last-boundary-cause))
 
-(defun undo--ensure-boundary (reason)
+(defun undo-auto--ensure-boundary (cause)
   "Add an `undo-boundary' to the current buffer if needed.
 REASON describes the reason that the boundary is being added; see
-`undo-last-boundary' for more information."
+`undo-auto--last-boundary' for more information."
   (when (and
-         buffer-undo-list
-         (undo--needs-boundary-p))
+         (undo-auto--needs-boundary-p))
     (let ((last-amalgamating
-           (undo--last-boundary-amalgamating-p)))
-      (when (and last-amalgamating
-                 (eq 'amalgamate reason))
-        (setq reason
-              (cons (1+ last-amalgamating)
-                    undo--undoably-changed-buffers)))
+           (undo-auto--last-boundary-amalgamating-number)))
       (undo-boundary)
-      (setq undo-last-boundary
-            (if (eq 'amalgamate reason)
-                (cons 0 undo--undoably-changed-buffers)
-              reason)))
-    t))
+      (setq undo-auto--last-boundary-cause
+            (if (eq 'amalgamate cause)
+                (cons
+                 (if last-amalgamating (1+ last-amalgamating) 0)
+                 undo-auto--undoably-changed-buffers)
+              cause)))))
 
-(defun undo--auto-boundary (reason)
-  "Check recently change buffers and add a boundary if necessary.
+(defun undo-auto--boundary (cause)
+  "Check recently changed buffers and add a boundary if necessary.
 REASON describes the reason that the boundary is being added; see
 `undo-last-boundary' for more information."
-  (dolist (b undo--undoably-changed-buffers)
+  (dolist (b undo-auto--undoably-changed-buffers)
           (when (buffer-live-p b)
             (with-current-buffer b
-              (undo--ensure-boundary reason))))
-  (setq undo--undoably-changed-buffers nil))
+              (undo-auto--ensure-boundary cause))))
+  (setq undo-auto--undoably-changed-buffers nil))
 
-(defun undo--auto-boundary-timer ()
+(defun undo-auto--boundary-timer ()
   "Timer which will run `undo--auto-boundary-timer'."
-  (undo--auto-boundary 'timer)
-  (setq undo-auto-current-boundary-timer nil))
+  (undo-auto--boundary 'timer)
+  (setq undo-auto--current-boundary-timer nil))
 
-(defun undo--auto-boundary-ensure-timer ()
+(defun undo-auto--boundary-ensure-timer ()
   "Ensure that the `undo-auto-boundary-timer' is set."
-  (unless undo-auto-current-boundary-timer
-    (setq undo-auto-current-boundary-timer
-          (run-at-time 10 nil 'undo--auto-boundary-timer))))
+  (unless undo-auto--current-boundary-timer
+    (setq undo-auto--current-boundary-timer
+          (run-at-time 10 nil #'undo-auto--boundary-timer))))
 
-(defvar undo--undoably-changed-buffers nil
+(defvar undo-auto--undoably-changed-buffers nil
   "List of buffers that have changed recently.
 
-This list is maintained by `undo--undoable-change' and
-`undo--auto-boundary' and can be affected by changes to their
+This list is maintained by `undo-auto--undoable-change' and
+`undo-auto--boundary' and can be affected by changes to their
 default values.
 
-See also `undo--buffer-undoably-changed'.")
+See also `undo-auto--buffer-undoably-changed'.")
 
-(defun undo--auto-add-boundary ()
-  "Add an `undo-boundary' is appropriate buffers."
-  (unless (eq buffer-undo-list t)
-    (undo--auto-boundary
-     (if undo--this-command-amalgamating
-         'amalgamate
-       'command)))
-  (setq undo--this-command-amalgamating nil))
+(defun undo-auto--add-boundary ()
+  "Add an `undo-boundary' in appropriate buffers."
+  (undo-auto--boundary
+   (if undo-auto--this-command-amalgamating
+       'amalgamate
+     'command))
+  (setq undo-auto--this-command-amalgamating nil))
 
 (defun undo-auto--amalgamate ()
   "Amalgamate undo if necessary.
-This function is called before `self-insert-command', and removes
-the previous `undo-boundary' if a series of `self-insert-command'
-calls have been made."
+This function can be called after an amalgamating command.  It
+removes the previous `undo-boundary' if a series of such calls
+have been made. By default `self-insert-command' and
+`delete-char' are the only amalgamating commands, although this
+function could be called by any command wishing to have this
+behaviour."
   (let ((last-amalgamating-count
-         (undo--last-boundary-amalgamating-p)))
-    (setq undo--this-command-amalgamating t)
+         (undo-auto--last-boundary-amalgamating-number)))
+    (setq undo-auto--this-command-amalgamating t)
     (when
         last-amalgamating-count
       (if
           (and
            (< last-amalgamating-count 20)
            (eq this-command last-command))
-          ;; amalgamate all buffers that have changed
-          (dolist (b (cdr undo-last-boundary))
+          ;; Amalgamate all buffers that have changed.
+          (dolist (b (cdr undo-auto--last-boundary-cause))
             (when (buffer-live-p b)
               (with-current-buffer
                   b
@@ -2886,12 +2883,12 @@ calls have been made."
                          (not (car buffer-undo-list)))
                   (setq buffer-undo-list
                         (cdr buffer-undo-list))))))
-        (setq undo-last-boundary 0)))))
+        (setq undo-auto--last-boundary-cause 0)))))
 
-(defun undo--undoable-change ()
+(defun undo-auto--undoable-change ()
   "Called after every undoable buffer change."
-  (add-to-list 'undo--undoably-changed-buffers (current-buffer))
-  (undo--auto-boundary-ensure-timer))
+  (add-to-list 'undo-auto--undoably-changed-buffers (current-buffer))
+  (undo-auto--boundary-ensure-timer))
 ;; End auto-boundary section
 
 (defcustom undo-ask-before-discard nil

@@ -40,7 +40,7 @@ static Lisp_Object pending_boundary;
 void
 run_undoable_change ()
 {
-  call0 (Qundo__undoable_change);
+  call0 (Qundo_auto__undoable_change);
 }
 
 /* Record point as it was at beginning of this command (if necessary)
@@ -293,7 +293,7 @@ but another undo command will undo to the previous boundary.  */)
   last_boundary_position = PT;
   last_boundary_buffer = current_buffer;
 
-  Fset (Qundo_last_boundary, Qexplicit);
+  Fset (Qundo_auto__last_boundary, Qexplicit);
   return Qnil;
 }
 
@@ -436,8 +436,8 @@ void
 syms_of_undo (void)
 {
   DEFSYM (Qinhibit_read_only, "inhibit-read-only");
-  DEFSYM (Qundo__undoable_change, "undo--undoable-change");
-  DEFSYM (Qundo_last_boundary, "undo-last-boundary");
+  DEFSYM (Qundo_auto__undoable_change, "undo-auto--undoable-change");
+  DEFSYM (Qundo_auto__last_boundary, "undo-auto--last-boundary");
   DEFSYM (Qexplicit, "explicit");
 
   /* Marker for function call undo list elements.  */

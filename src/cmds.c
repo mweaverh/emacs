@@ -291,7 +291,7 @@ At the end, it runs `post-self-insert-hook'.  */)
 				    XINT (last_command_event));
     int val = internal_self_insert (character, XFASTINT (n));
     if (val==2)
-      Fset (Qundo__this_command_amalgamating, Qnil);
+      Fset (Qundo_auto__this_command_amalgamating, Qnil);
     frame_make_pointer_invisible (SELECTED_FRAME ());
   }
 
@@ -496,8 +496,9 @@ internal_self_insert (int c, EMACS_INT n)
 void
 syms_of_cmds (void)
 {
-  DEFSYM (Qundo_auto__amalgamate,
-          "undo-auto--amalgamate" );
+  DEFSYM (Qundo_auto__amalgamate, "undo-auto--amalgamate");
+  DEFSYM (Qundo_auto__this_command_amalgamating,
+          "undo-auto--this-command-amalgamating");
 
   DEFSYM (Qkill_forward_chars, "kill-forward-chars");
 
