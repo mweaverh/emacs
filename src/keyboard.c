@@ -1504,7 +1504,7 @@ command_loop_1 (void)
 
             /* Ensure that we have added appropriate undo-boundaries as a
                result of changes from the last command. */
-            call0 (Qundo__auto_add_boundary);
+            call0 (Qundo_auto__add_boundary);
 
             call1 (Qcommand_execute, Vthis_command);
 
@@ -11088,7 +11088,7 @@ syms_of_keyboard (void)
   DEFSYM (Qpre_command_hook, "pre-command-hook");
   DEFSYM (Qpost_command_hook, "post-command-hook");
 
-  DEFSYM (Qundo__auto_add_boundary, "undo--auto-add-boundary");
+  DEFSYM (Qundo_auto__add_boundary, "undo-auto--add-boundary");
 
   DEFSYM (Qdeferred_action_function, "deferred-action-function");
   DEFSYM (Qdelayed_warnings_hook, "delayed-warnings-hook");

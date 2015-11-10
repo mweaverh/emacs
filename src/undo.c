@@ -293,7 +293,7 @@ but another undo command will undo to the previous boundary.  */)
   last_boundary_position = PT;
   last_boundary_buffer = current_buffer;
 
-  Fset (Qundo_auto__last_boundary, Qexplicit);
+  Fset (Qundo_auto__last_boundary_cause, Qexplicit);
   return Qnil;
 }
 
@@ -437,7 +437,7 @@ syms_of_undo (void)
 {
   DEFSYM (Qinhibit_read_only, "inhibit-read-only");
   DEFSYM (Qundo_auto__undoable_change, "undo-auto--undoable-change");
-  DEFSYM (Qundo_auto__last_boundary, "undo-auto--last-boundary");
+  DEFSYM (Qundo_auto__last_boundary_cause, "undo-auto--last-boundary-cause");
   DEFSYM (Qexplicit, "explicit");
 
   /* Marker for function call undo list elements.  */
