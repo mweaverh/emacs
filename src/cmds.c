@@ -290,7 +290,7 @@ At the end, it runs `post-self-insert-hook'.  */)
     int character = translate_char (Vtranslation_table_for_input,
 				    XINT (last_command_event));
     int val = internal_self_insert (character, XFASTINT (n));
-    if (val==2)
+    if (val == 2)
       Fset (Qundo_auto__this_command_amalgamating, Qnil);
     frame_make_pointer_invisible (SELECTED_FRAME ());
   }

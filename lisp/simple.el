@@ -2754,7 +2754,7 @@ with < or <= based on USE-<."
 	     '(0 . 0)))
     '(0 . 0)))
 
-;; Default undo-boundary addition
+;;; Default undo-boundary addition
 ;;
 ;; This section adds a new undo-boundary at either after a command is
 ;; called or in some cases on a timer called after a change is made in
@@ -2774,8 +2774,8 @@ automatically after a command, that is by the code defined in
 this section.
 
 If it is equal to a list, then the last boundary was inserted by
-an amalgamating command. The car of the list is the number of
-times a amalgamating command has been called, and the cdr are the
+an amalgamating command.  The car of the list is the number of
+times an amalgamating command has been called, and the cdr are the
 buffers that were changed during the last command.")
 
 (defvar undo-auto--current-boundary-timer nil
@@ -2785,7 +2785,7 @@ If set to non-nil, this will effectively disable the timer.")
 
 (defvar undo-auto--this-command-amalgamating nil
   "Non-nil if `this-command' should be amalgamated.
-This variable is set to nil by `undo-auto--boundary' and is set
+This variable is set to nil by `undo-auto--boundaries' and is set
 by `undo-auto--amalgamate'." )
 
 (defun undo-auto--needs-boundary-p ()
@@ -2815,7 +2815,7 @@ REASON describes the reason that the boundary is being added; see
                  undo-auto--undoably-changed-buffers)
               cause)))))
 
-(defun undo-auto--boundary (cause)
+(defun undo-auto--boundaries (cause)
   "Check recently changed buffers and add a boundary if necessary.
 REASON describes the reason that the boundary is being added; see
 `undo-last-boundary' for more information."
@@ -2827,7 +2827,7 @@ REASON describes the reason that the boundary is being added; see
 
 (defun undo-auto--boundary-timer ()
   "Timer which will run `undo--auto-boundary-timer'."
-  (undo-auto--boundary 'timer)
+  (undo-auto--boundaries 'timer)
   (setq undo-auto--current-boundary-timer nil))
 
 (defun undo-auto--boundary-ensure-timer ()
@@ -2840,14 +2840,14 @@ REASON describes the reason that the boundary is being added; see
   "List of buffers that have changed recently.
 
 This list is maintained by `undo-auto--undoable-change' and
-`undo-auto--boundary' and can be affected by changes to their
+`undo-auto--boundaries' and can be affected by changes to their
 default values.
 
 See also `undo-auto--buffer-undoably-changed'.")
 
 (defun undo-auto--add-boundary ()
   "Add an `undo-boundary' in appropriate buffers."
-  (undo-auto--boundary
+  (undo-auto--boundaries
    (if undo-auto--this-command-amalgamating
        'amalgamate
      'command))
@@ -2857,7 +2857,7 @@ See also `undo-auto--buffer-undoably-changed'.")
   "Amalgamate undo if necessary.
 This function can be called after an amalgamating command.  It
 removes the previous `undo-boundary' if a series of such calls
-have been made. By default `self-insert-command' and
+have been made.  By default `self-insert-command' and
 `delete-char' are the only amalgamating commands, although this
 function could be called by any command wishing to have this
 behaviour."
