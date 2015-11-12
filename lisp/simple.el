@@ -2827,8 +2827,8 @@ REASON describes the reason that the boundary is being added; see
 
 (defun undo-auto--boundary-timer ()
   "Timer which will run `undo--auto-boundary-timer'."
-  (undo-auto--boundaries 'timer)
-  (setq undo-auto--current-boundary-timer nil))
+  (setq undo-auto--current-boundary-timer nil)
+  (undo-auto--boundaries 'timer))
 
 (defun undo-auto--boundary-ensure-timer ()
   "Ensure that the `undo-auto-boundary-timer' is set."
