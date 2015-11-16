@@ -37,6 +37,14 @@ static Lisp_Object pending_boundary;
 static void
 run_undoable_change (void)
 {
+  if( NILP (Fmemq
+            (Fcurrent_buffer(),
+             Vundo_auto__undoably_changed_buffers))){
+    Fset (Qundo_auto__undoably_changed_buffers,
+          Fcons (Fcurrent_buffer(),
+                 Vundo_auto__undoably_changed_buffers));
+  }
+
   call0 (Qundo_auto__undoable_change);
 }
 
@@ -445,6 +453,14 @@ syms_of_undo (void)
   last_boundary_buffer = NULL;
 
   defsubr (&Sundo_boundary);
+
+  DEFSYM (Qundo_auto__undoably_changed_buffers,
+          "undo-auto--undoably-changed-buffers");
+
+  DEFVAR_LISP ("undo-auto--undoably-changed-buffers",
+               Vundo_auto__undoably_changed_buffers,
+               doc: /* We can write the doc later */ );
+  Vundo_auto__undoably_changed_buffers = Qnil;
 
   DEFVAR_INT ("undo-limit", undo_limit,
 	      doc: /* Keep no more undo information once it exceeds this size.

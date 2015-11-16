@@ -2869,14 +2869,14 @@ REASON describes the reason that the boundary is being added; see
     (setq undo-auto--current-boundary-timer
           (run-at-time 10 nil #'undo-auto--boundary-timer))))
 
-(defvar undo-auto--undoably-changed-buffers nil
-  "List of buffers that have changed recently.
+;; (defvar undo-auto--undoably-changed-buffers nil
+;;   "List of buffers that have changed recently.
 
-This list is maintained by `undo-auto--undoable-change' and
-`undo-auto--boundaries' and can be affected by changes to their
-default values.
+;; This list is maintained by `undo-auto--undoable-change' and
+;; `undo-auto--boundaries' and can be affected by changes to their
+;; default values.
 
-See also `undo-auto--buffer-undoably-changed'.")
+;; See also `undo-auto--buffer-undoably-changed'.")
 
 (defun undo-auto--add-boundary ()
   "Add an `undo-boundary' in appropriate buffers."
@@ -2920,7 +2920,7 @@ behaviour."
 
 (defun undo-auto--undoable-change ()
   "Called after every undoable buffer change."
-  (add-to-list 'undo-auto--undoably-changed-buffers (current-buffer))
+  ;;(add-to-list 'undo-auto--undoably-changed-buffers (current-buffer))
   (undo-auto--boundary-ensure-timer))
 ;; End auto-boundary section
 
