@@ -2867,7 +2867,16 @@ REASON describes the reason that the boundary is being added; see
   "Ensure that the `undo-auto-boundary-timer' is set."
   (unless undo-auto--current-boundary-timer
     (setq undo-auto--current-boundary-timer
-          (run-at-time 10 nil #'undo-auto--boundary-timer))))
+          (run-with-idle-timer 10 t
+                               #'undo-auto--boundary-timer))))
+
+(defun undo-auto--boundary-post-command-hook ()
+  (remove-hook 'post-command-hook
+               #'undo-auto--boundary-post-command-hook)
+  (undo-auto--boundary-ensure-timer))
+
+(add-hook 'post-command-hook
+          #'undo-auto--boundary-post-command-hook)
 
 ;; (defvar undo-auto--undoably-changed-buffers nil
 ;;   "List of buffers that have changed recently.
