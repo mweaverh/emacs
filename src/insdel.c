@@ -30,6 +30,7 @@ along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.  */
 #include "window.h"
 #include "region-cache.h"
 
+
 static void insert_from_string_1 (Lisp_Object, ptrdiff_t, ptrdiff_t, ptrdiff_t,
 				  ptrdiff_t, bool, bool);
 static void insert_from_buffer_1 (struct buffer *, ptrdiff_t, ptrdiff_t, bool);
@@ -1765,6 +1766,15 @@ modify_text (ptrdiff_t start, ptrdiff_t end)
   bset_point_before_scroll (current_buffer, Qnil);
 }
 
+static void
+run_undoable_change (void)
+{
+  if (EQ (BVAR (current_buffer, undo_list), Qt))
+    return;
+
+  call0 (Qundo_auto__undoable_change);
+}
+
 /* Check that it is okay to modify the buffer between START and END,
    which are char positions.
 
@@ -1785,6 +1795,8 @@ prepare_to_modify_buffer_1 (ptrdiff_t start, ptrdiff_t end,
   XSETFASTINT (temp, start);
   if (!NILP (BVAR (current_buffer, read_only)))
     Fbarf_if_buffer_read_only (temp);
+
+  run_undoable_change();
 
   bset_redisplay (current_buffer);
 
@@ -2186,6 +2198,8 @@ syms_of_insdel (void)
   staticpro (&combine_after_change_buffer);
   combine_after_change_list = Qnil;
   combine_after_change_buffer = Qnil;
+
+  DEFSYM (Qundo_auto__undoable_change, "undo-auto--undoable-change");
 
   DEFVAR_LISP ("combine-after-change-calls", Vcombine_after_change_calls,
 	       doc: /* Used internally by the function `combine-after-change-calls' macro.  */);
