@@ -52,10 +52,10 @@
 (defcustom gnus-cloud-storage-method (if (featurep 'epg) 'epg 'base64-gzip)
   "Storage method for cloud data, defaults to EPG if that's available."
   :group 'gnus-cloud
-  :type '(choice (const :tag "No encoding" nil)
-                 (const :tag "Base64" base64)
-                 (const :tag "Base64+gzip" base64-gzip)
-                 (const :tag "EPG" epg)))
+  :type '(radio (const :tag "No encoding" nil)
+                (const :tag "Base64" base64)
+                (const :tag "Base64+gzip" base64-gzip)
+                (const :tag "EPG" epg)))
 
 (defcustom gnus-cloud-interactive t
   "Whether Gnus Cloud changes should be confirmed."
@@ -68,8 +68,13 @@
 (defvar gnus-cloud-version 1)
 (defvar gnus-cloud-sequence 1)
 
-(defvar gnus-cloud-method nil
-  "The IMAP select method used to store the cloud data.")
+(defcustom gnus-cloud-method nil
+  "The IMAP select method used to store the cloud data.
+See also `gnus-server-toggle-cloud-method-server' for an
+easy interactive way to set this from the Server buffer."
+  :group 'gnus-cloud
+  :type '(radio (const :tag "Not set" nil)
+                (string :tag "A Gnus server name as a string")))
 
 (defun gnus-cloud-make-chunk (elems)
   (with-temp-buffer
@@ -467,6 +472,9 @@ Otherwise, returns the Gnus Cloud data chunks."
 
 (defun gnus-cloud-host-server-p (server)
   (equal gnus-cloud-method server))
+
+(defun gnus-cloud-host-acceptable-method-p (server)
+  (eq (car-safe (gnus-server-to-method server)) 'nnimap))
 
 (defun gnus-cloud-collect-full-newsrc ()
   "Collect all the Gnus newsrc data in a portable format."
