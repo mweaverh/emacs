@@ -1764,7 +1764,7 @@ It does not do the work that's pointless to redo on a recursive entry."
     (let* ((case-fold-search t) ; Ignore case for `hide-ifdef-header-regexp'
            (expand-header (and hide-ifdef-expand-reinclusion-protection
                                (string-match hide-ifdef-header-regexp
-                                             (buffer-file-name))
+                                             (or (buffer-file-name) ""))
                                (zerop hif-recurse-level)))
            (case-fold-search nil)
            min max)
