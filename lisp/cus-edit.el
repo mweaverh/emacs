@@ -769,16 +769,24 @@ when the action is chosen.")
 (defvar custom-options nil
   "Customization widgets in the current buffer.")
 
+(defcustom custom-dont-query-on-save nil
+  "If non-nil, skip the confirmation query in `custom-command-apply' "
+  :type 'boolean
+  :group 'custom-browse)
+
 (defun custom-command-apply (fun query &optional strong-query)
   "Call function FUN on all widgets in `custom-options'.
-If there is more than one widget, ask user for confirmation using
-the query string QUERY, using `y-or-n-p' if STRONG-QUERY is nil,
-and `yes-or-no-p' otherwise.  Return non-nil if the functionality
-has been executed, nil otherwise."
+If there is more than one widget, ask user for confirmation using the query
+string QUERY (unless `custom-dont-query-on-save' is non-nil), using `y-or-n-p'
+if STRONG-QUERY is nil, and `yes-or-no-p' otherwise. Return non-nil if the
+functionality has been executed, nil otherwise."
   (if (or (and (= 1 (length custom-options))
 	       (memq (widget-type (car custom-options))
 		     '(custom-variable custom-face)))
-	  (funcall (if strong-query 'yes-or-no-p 'y-or-n-p) query))
+          (funcall (cond (custom-dont-query-on-save '(lambda (arg) t))
+                         (strong-query	  'yes-or-no-p)
+                         (t				  'y-or-n-p) )
+					 query))
       (progn (mapc fun custom-options) t)
     (message "Aborted")
     nil))
@@ -3706,10 +3714,15 @@ Optional EVENT is the location for the menu."
       (setq comment nil)
       ;; Make the comment invisible by hand if it's empty
       (custom-comment-hide comment-widget))
+    (put symbol 'customized-face value)
     (custom-push-theme 'theme-face symbol 'user 'set value)
-    (face-spec-set symbol value 'customized-face)
-    (put symbol 'face-comment comment)
+    (if (face-spec-choose value)
+	(face-spec-set symbol value t)
+      ;; face-set-spec ignores empty attribute lists, so just give it
+      ;; something harmless instead.
+      (face-spec-set symbol '((t :foreground unspecified)) t))
     (put symbol 'customized-face-comment comment)
+    (put symbol 'face-comment comment)
     (custom-face-state-set widget)
     (custom-redraw-magic widget)))
 
@@ -3718,14 +3731,20 @@ Optional EVENT is the location for the menu."
   (let* ((symbol (widget-value widget))
 	 (value  (custom-face-widget-to-spec widget))
 	 (comment-widget (widget-get widget :comment-widget))
-	 (comment (widget-value comment-widget))
-	 (standard (eq (widget-get widget :custom-state) 'standard)))
+	 (comment (widget-value comment-widget)))
     (when (equal comment "")
       (setq comment nil)
       ;; Make the comment invisible by hand if it's empty
       (custom-comment-hide comment-widget))
     (custom-push-theme 'theme-face symbol 'user 'set value)
-    (face-spec-set symbol value (if standard 'reset 'saved-face))
+    (if (face-spec-choose value)
+	(face-spec-set symbol value t)
+      ;; face-set-spec ignores empty attribute lists, so just give it
+      ;; something harmless instead.
+      (face-spec-set symbol '((t :foreground unspecified)) t))
+    (unless (eq (widget-get widget :custom-state) 'standard)
+      (put symbol 'saved-face value))
+    (put symbol 'customized-face nil)
     (put symbol 'face-comment comment)
     (put symbol 'customized-face-comment nil)
     (put symbol 'saved-face-comment comment)))
@@ -3754,12 +3773,13 @@ uncustomized (themed or standard) face."
 	 (saved-face (get face 'saved-face))
 	 (comment (get face 'saved-face-comment))
 	 (comment-widget (widget-get widget :comment-widget)))
+    (put face 'customized-face nil)
+    (put face 'customized-face-comment nil)
     (custom-push-theme 'theme-face face 'user
 		       (if saved-face 'set 'reset)
 		       saved-face)
-    (face-spec-set face saved-face 'saved-face)
+    (face-spec-set face saved-face t)
     (put face 'face-comment comment)
-    (put face 'customized-face-comment nil)
     (widget-value-set child saved-face)
     ;; This call manages the comment visibility
     (widget-value-set comment-widget (or comment ""))
@@ -3779,10 +3799,11 @@ redraw the widget immediately."
 	 (comment-widget (widget-get widget :comment-widget)))
     (unless value
       (user-error "No standard setting for this face"))
-    (custom-push-theme 'theme-face symbol 'user 'reset)
-    (face-spec-set symbol value 'reset)
-    (put symbol 'face-comment nil)
+    (put symbol 'customized-face nil)
     (put symbol 'customized-face-comment nil)
+    (custom-push-theme 'theme-face symbol 'user 'reset)
+    (face-spec-set symbol value t)
+    (custom-theme-recalc-face symbol)
     (if (and custom-reset-standard-faces-list
 	     (or (get symbol 'saved-face) (get symbol 'saved-face-comment)))
 	;; Do this later.
@@ -3798,6 +3819,7 @@ redraw the widget immediately."
 	(put symbol 'saved-face nil)
 	(put symbol 'saved-face-comment nil)
 	(custom-save-all))
+      (put symbol 'face-comment nil)
       (widget-value-set child
 			(custom-pre-filter-face-spec
 			 (list (list t (custom-face-attributes-get
