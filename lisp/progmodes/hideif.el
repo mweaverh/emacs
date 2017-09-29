@@ -1996,15 +1996,17 @@ With optional prefix argument ARG, also hide the #ifdefs themselves."
   "Set `hide-ifdef-env' to the define list specified by NAME."
   (interactive
    (list (completing-read "Use define list: "
-			  (mapcar (lambda (x) (symbol-name (car x)))
+                          (mapcar (lambda (x) (symbol-name (car x)))
                                   hide-ifdef-define-alist)
                           nil t)))
   (if (stringp name) (setq name (intern name)))
   (let ((define-list (assoc name hide-ifdef-define-alist)))
     (if define-list
-	(setq hide-ifdef-env
-	      (mapcar (lambda (arg) (cons arg t))
-		      (cdr define-list)))
+        (setq hide-ifdef-env
+              (mapcar (lambda (arg)
+                        (if (consp arg) arg  ;; msw here
+                          (cons arg t)))
+                      (cdr define-list)))
       (error "No define list for %s" name))
     (if hide-ifdef-hiding (hide-ifdefs))))
 
