@@ -1,0 +1,2047 @@
+make -C lib all
+make[1]: Entering directory '/usr/local/src/emacs/lib'
+  GEN      alloca.h
+  GEN      dirent.h
+  GEN      fcntl.h
+  GEN      inttypes.h
+  GEN      limits.h
+  GEN      signal.h
+  GEN      stdint.h
+  GEN      stdio.h
+  GEN      stdlib.h
+  GEN      string.h
+  GEN      sys/select.h
+  GEN      sys/stat.h
+  GEN      sys/time.h
+  GEN      sys/types.h
+  GEN      time.h
+  GEN      unistd.h
+  CC       explicit_bzero.o
+  CC       fcntl.o
+  CC       sig2str.o
+  CC       time_rz.o
+  CC       acl-errno-valid.o
+  CC       acl-internal.o
+  CC       get-permissions.o
+  CC       set-permissions.o
+  CC       allocator.o
+  CC       binary-io.o
+  CC       c-ctype.o
+  CC       c-strcasecmp.o
+  CC       c-strncasecmp.o
+  CC       careadlinkat.o
+  CC       close-stream.o
+  CC       count-leading-zeros.o
+  CC       count-one-bits.o
+  CC       count-trailing-zeros.o
+  CC       md5.o
+  CC       sha1.o
+  CC       sha256.o
+  CC       sha512.o
+  CC       dtoastr.o
+  CC       dtotimespec.o
+  CC       filemode.o
+  CC       filevercmp.o
+  CC       gettime.o
+  CC       nstrftime.o
+  CC       pipe2.o
+  CC       qcopy-acl.o
+  CC       stat-time.o
+  CC       tempname.o
+  CC       timespec.o
+  CC       timespec-add.o
+  CC       timespec-sub.o
+  CC       u64.o
+  CC       unistd.o
+  CC       utimens.o
+  CC       openat-die.o
+  CC       save-cwd.o
+  AR       libgnu.a
+make[1]: Leaving directory '/usr/local/src/emacs/lib'
+make -C lib-src all
+make[1]: Entering directory '/usr/local/src/emacs/lib-src'
+  CC       regex.o
+  CCLD     etags
+  CCLD     ctags
+  CCLD     emacsclient
+  CCLD     ebrowse
+  CCLD     profile
+  CCLD     hexl
+  CC       pop.o
+  CCLD     movemail
+  CCLD     make-docfile
+make[1]: Leaving directory '/usr/local/src/emacs/lib-src'
+make -C src VCSWITNESS='$(srcdir)/../.git/logs/HEAD' all
+make[1]: Entering directory '/usr/local/src/emacs/src'
+  GEN      lisp.mk
+  GEN      globals.h
+  CC       vm-limit.o
+  CC       dispnew.o
+  CC       frame.o
+  CC       scroll.o
+  CC       xdisp.o
+  CC       menu.o
+  CC       xmenu.o
+  CC       window.o
+  CC       charset.o
+  CC       coding.o
+  CC       category.o
+  CC       ccl.o
+  CC       character.o
+  CC       chartab.o
+  CC       bidi.o
+  CC       cm.o
+  CC       term.o
+  CC       terminal.o
+  CC       xfaces.o
+  CC       xterm.o
+  CC       xfns.o
+  CC       xselect.o
+  CC       xrdb.o
+  CC       xsmfns.o
+  CC       xsettings.o
+  CC       gtkutil.o
+  CC       emacsgtkfixed.o
+  CC       dbusbind.o
+  CC       emacs.o
+  CC       keyboard.o
+  CC       macros.o
+  CC       keymap.o
+  CC       sysdep.o
+  CC       buffer.o
+  CC       filelock.o
+  CC       insdel.o
+  CC       marker.o
+  CC       minibuf.o
+  CC       fileio.o
+  CC       dired.o
+  CC       cmds.o
+  CC       casetab.o
+  CC       casefiddle.o
+  CC       indent.o
+  CC       search.o
+  CC       regex.o
+  CC       undo.o
+  CC       alloc.o
+  CC       data.o
+  GEN      buildobj.h
+  CC       doc.o
+  CC       editfns.o
+  CC       callint.o
+  CC       eval.o
+  CC       floatfns.o
+  CC       fns.o
+  CC       font.o
+  CC       print.o
+  CC       lread.o
+  CC       dynlib.o
+  CC       emacs-module.o
+  CC       syntax.o
+  CC       unexelf.o
+  CC       bytecode.o
+  CC       process.o
+  CC       gnutls.o
+  CC       callproc.o
+  CC       region-cache.o
+  CC       sound.o
+  CC       atimer.o
+  CC       doprnt.o
+  CC       intervals.o
+  CC       textprop.o
+  CC       composite.o
+  CC       xml.o
+  CC       lcms.o
+  CC       inotify.o
+  CC       xwidget.o
+  CC       profiler.o
+  CC       decompress.o
+  CC       thread.o
+  CC       systhread.o
+  CC       xfont.o
+  CC       ftfont.o
+  CC       xftfont.o
+  CC       ftxfont.o
+  CC       fontset.o
+  CC       fringe.o
+  CC       image.o
+  CC       xgselect.o
+  CC       terminfo.o
+  CC       lastfile.o
+make -C ../admin/charsets all
+make[2]: Entering directory '/usr/local/src/emacs/admin/charsets'
+  GEN      ../../etc/charsets/JISX2131.map
+  GEN      charsets.stamp
+make[2]: Leaving directory '/usr/local/src/emacs/admin/charsets'
+make -C ../admin/unidata charscript.el
+make[2]: Entering directory '/usr/local/src/emacs/admin/unidata'
+make[2]: Nothing to be done for 'charscript.el'.
+make[2]: Leaving directory '/usr/local/src/emacs/admin/unidata'
+  CCLD     temacs
+/bin/mkdir -p ../etc
+make -C ../lisp update-subdirs
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+./temacs --batch  --load loadup bootstrap
+mv -f emacs bootstrap-emacs
+make -C ../lisp compile-first EMACS="../src/bootstrap-emacs"
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      emacs-lisp/macroexp.elc
+  ELC      emacs-lisp/cconv.elc
+  ELC      emacs-lisp/byte-opt.elc
+  ELC      emacs-lisp/bytecomp.elc
+  ELC      emacs-lisp/autoload.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make -C ../lisp autoloads EMACS="../src/bootstrap-emacs"
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+make -C ../leim all EMACS="../src/bootstrap-emacs"
+make[3]: Entering directory '/usr/local/src/emacs/leim'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/usr/local/src/emacs/leim'
+make -C ../admin/grammars all EMACS="../../src/bootstrap-emacs"
+make[3]: Entering directory '/usr/local/src/emacs/admin/grammars'
+  GEN      ../../lisp/cedet/semantic/bovine/c-by.el
+  GEN      ../../lisp/cedet/semantic/bovine/make-by.el
+  GEN      ../../lisp/cedet/semantic/bovine/scm-by.el
+  GEN      ../../lisp/cedet/semantic/wisent/javat-wy.el
+  GEN      ../../lisp/cedet/semantic/wisent/js-wy.el
+  GEN      ../../lisp/cedet/semantic/wisent/python-wy.el
+  GEN      ../../lisp/cedet/srecode/srt-wy.el
+make[3]: Leaving directory '/usr/local/src/emacs/admin/grammars'
+  GEN      calendar/cal-loaddefs.el
+  GEN      calendar/diary-loaddefs.el
+  GEN      calendar/hol-loaddefs.el
+  GEN      mh-e/mh-loaddefs.el
+  GEN      net/tramp-loaddefs.el
+Directories for loaddefs: . ./calc ./calendar ./cedet ./cedet/ede ./cedet/semantic ./cedet/semantic/analyze ./cedet/semantic/bovine ./cedet/semantic/decorate ./cedet/semantic/symref ./cedet/semantic/wisent ./cedet/srecode ./emacs-lisp ./emulation ./erc ./eshell ./gnus ./image ./international ./language ./leim ./leim/ja-dic ./leim/quail ./mail ./mh-e ./net ./nxml ./org ./play ./progmodes ./textmodes ./url ./vc
+  GEN      loaddefs.el
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/abbrev.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/bindings.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/buff-menu.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/button.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/case-table.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/composite.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/cus-face.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/cus-start.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/custom.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/disp-table.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/dnd.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/dos-fns.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/dos-vars.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/dos-w32.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/dynamic-setting.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/electric.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/emacs-lisp/backquote.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/emacs-lisp/byte-run.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/emacs-lisp/cl-generic.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/emacs-lisp/cl-preloaded.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/emacs-lisp/eldoc.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/emacs-lisp/float-sup.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/emacs-lisp/lisp-mode.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/emacs-lisp/lisp.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/emacs-lisp/map-ynp.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/emacs-lisp/nadvice.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/emacs-lisp/regexp-opt.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/emacs-lisp/syntax.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/emacs-lisp/tabulated-list.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/emacs-lisp/timer.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/env.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/epa-hook.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/facemenu.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/faces.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/files.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/font-core.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/font-lock.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/format.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/frame.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/fringe.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/help.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/image.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/indent.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/international/charscript.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/international/characters.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make -C ../admin/unidata all EMACS="../../src/bootstrap-emacs"
+make[2]: Entering directory '/usr/local/src/emacs/admin/unidata'
+  ELC      uvs.elc
+  GEN      ../../src/macuvs.h
+  ELC      unidata-gen.elc
+  GEN      unidata.txt
+  GEN      ../../lisp/international/uni-bidi.el
+  GEN      ../../lisp/international/uni-brackets.el
+  GEN      ../../lisp/international/uni-category.el
+  GEN      ../../lisp/international/uni-combining.el
+  GEN      ../../lisp/international/uni-comment.el
+  GEN      ../../lisp/international/uni-decimal.el
+  GEN      ../../lisp/international/uni-decomposition.el
+  GEN      ../../lisp/international/uni-digit.el
+  GEN      ../../lisp/international/uni-lowercase.el
+  GEN      ../../lisp/international/uni-mirrored.el
+  GEN      ../../lisp/international/uni-name.el
+  GEN      ../../lisp/international/uni-numeric.el
+  GEN      ../../lisp/international/uni-old-name.el
+  GEN      ../../lisp/international/uni-special-lowercase.el
+  GEN      ../../lisp/international/uni-special-titlecase.el
+  GEN      ../../lisp/international/uni-special-uppercase.el
+  GEN      ../../lisp/international/uni-titlecase.el
+  GEN      ../../lisp/international/uni-uppercase.el
+  GEN      ../../lisp/international/charprop.el
+make[2]: Leaving directory '/usr/local/src/emacs/admin/unidata'
+make -C ../admin/charsets cp51932.el
+make[2]: Entering directory '/usr/local/src/emacs/admin/charsets'
+make[2]: Nothing to be done for 'cp51932.el'.
+make[2]: Leaving directory '/usr/local/src/emacs/admin/charsets'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/international/cp51932.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make -C ../admin/charsets eucjp-ms.el
+make[2]: Entering directory '/usr/local/src/emacs/admin/charsets'
+make[2]: Nothing to be done for 'eucjp-ms.el'.
+make[2]: Leaving directory '/usr/local/src/emacs/admin/charsets'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/international/eucjp-ms.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/international/fontset.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/international/mule-cmds.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/international/mule-conf.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/international/mule-util.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/international/mule.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/international/ucs-normalize.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/isearch.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/jit-lock.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/jka-cmpr-hook.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/burmese.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/cham.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/chinese.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/cyrillic.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/czech.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/english.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/ethiopic.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/european.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/georgian.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/greek.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/hebrew.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/indian.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/japanese.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/khmer.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/korean.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/lao.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/misc-lang.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/romanian.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/sinhala.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/slovak.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/tai-viet.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/thai.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/tibetan.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/utf-8-lang.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/language/vietnamese.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/ls-lisp.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/menu-bar.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/minibuffer.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/mouse.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/mwheel.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/newcomment.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/obarray.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/progmodes/elisp-mode.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/progmodes/prog-mode.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/register.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/replace.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/rfn-eshadow.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/scroll-bar.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/select.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/simple.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/startup.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/subr.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/term/common-win.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/term/internal.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/term/ns-win.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/term/pc-win.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/term/tty-colors.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/term/w32-win.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/term/x-win.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/textmodes/fill.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/textmodes/page.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/textmodes/paragraphs.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/textmodes/text-mode.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/tool-bar.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/tooltip.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/uniquify.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/vc/ediff-hook.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/vc/vc-hooks.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/version.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/w32-fns.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/w32-vars.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/widget.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/window.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      ../lisp/x-dnd.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+  GEN      ../etc/DOC
+LC_ALL=C ./temacs -batch  -l loadup dump
+ln -f emacs bootstrap-emacs
+make[1]: Leaving directory '/usr/local/src/emacs/src'
+make -C lisp all
+make[1]: Entering directory '/usr/local/src/emacs/lisp'
+make -C ../leim all EMACS="../src/emacs"
+make[2]: Entering directory '/usr/local/src/emacs/leim'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/usr/local/src/emacs/leim'
+make -C ../admin/grammars all EMACS="../../src/emacs"
+make[2]: Entering directory '/usr/local/src/emacs/admin/grammars'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/usr/local/src/emacs/admin/grammars'
+make[2]: Entering directory '/usr/local/src/emacs/lisp'
+  ELC      align.elc
+  ELC      allout.elc
+  ELC      allout-widgets.elc
+  ELC      ansi-color.elc
+  ELC      apropos.elc
+  ELC      arc-mode.elc
+  ELC      array.elc
+  ELC      auth-source.elc
+  ELC      auth-source-pass.elc
+  ELC      autoarg.elc
+  ELC      autoinsert.elc
+  ELC      autorevert.elc
+  ELC      avoid.elc
+  ELC      battery.elc
+  ELC      bookmark.elc
+  ELC      bs.elc
+  ELC      calculator.elc
+  ELC      cdl.elc
+  ELC      char-fold.elc
+  ELC      chistory.elc
+  ELC      cmuscheme.elc
+  ELC      color.elc
+  ELC      comint.elc
+  ELC      completion.elc
+  ELC      cus-dep.elc
+  ELC      cus-edit.elc
+  ELC      cus-theme.elc
+  ELC      dabbrev.elc
+  ELC      delim-col.elc
+  ELC      delsel.elc
+  ELC      descr-text.elc
+  ELC      desktop.elc
+  ELC      dframe.elc
+  ELC      dired-aux.elc
+  ELC      dired.elc
+  ELC      dired-x.elc
+  ELC      dirtrack.elc
+  ELC      display-line-numbers.elc
+  ELC      doc-view.elc
+  ELC      dom.elc
+  ELC      double.elc
+  ELC      ebuff-menu.elc
+  ELC      echistory.elc
+  ELC      ecomplete.elc
+  ELC      edmacro.elc
+  ELC      ehelp.elc
+  ELC      elec-pair.elc
+  ELC      elide-head.elc
+  ELC      emacs-lock.elc
+  ELC      epa-dired.elc
+  ELC      epa.elc
+  ELC      epa-file.elc
+  ELC      epa-mail.elc
+  ELC      epg-config.elc
+  ELC      epg.elc
+  ELC      expand.elc
+  ELC      ezimage.elc
+  ELC      face-remap.elc
+  ELC      ffap.elc
+  ELC      filecache.elc
+  ELC      filenotify.elc
+  ELC      filesets.elc
+  ELC      files-x.elc
+  ELC      find-cmd.elc
+  ELC      find-dired.elc
+  ELC      finder.elc
+  ELC      find-file.elc
+  ELC      find-lisp.elc
+  ELC      flow-ctrl.elc
+  ELC      foldout.elc
+  ELC      follow.elc
+  ELC      format-spec.elc
+  ELC      forms.elc
+  ELC      frameset.elc
+  ELC      generic-x.elc
+  ELC      help-at-pt.elc
+  ELC      help-fns.elc
+  ELC      help-macro.elc
+  ELC      help-mode.elc
+  ELC      hexl.elc
+  ELC      hex-util.elc
+  ELC      hfy-cmap.elc
+  ELC      hilit-chg.elc
+  ELC      hi-lock.elc
+  ELC      hippie-exp.elc
+  ELC      hl-line.elc
+  ELC      htmlfontify.elc
+  ELC      ibuf-ext.elc
+  ELC      ibuffer.elc
+  ELC      ibuf-macs.elc
+  ELC      icomplete.elc
+  ELC      ido.elc
+  ELC      ielm.elc
+  ELC      iimage.elc
+  ELC      image-dired.elc
+  ELC      image-file.elc
+  ELC      image-mode.elc
+  ELC      imenu.elc
+  ELC      info.elc
+  ELC      info-look.elc
+  ELC      informat.elc
+  ELC      info-xref.elc
+  ELC      isearchb.elc
+  ELC      jka-compr.elc
+  ELC      json.elc
+  ELC      kermit.elc
+  ELC      kmacro.elc
+  ELC      linum.elc
+  ELC      loadhist.elc
+  ELC      locate.elc
+  ELC      lpr.elc
+  ELC      macros.elc
+  ELC      makesum.elc
+  ELC      man.elc
+  ELC      master.elc
+  ELC      mb-depth.elc
+  ELC      md4.elc
+  ELC      midnight.elc
+  ELC      minibuf-eldef.elc
+  ELC      misc.elc
+  ELC      misearch.elc
+  ELC      mouse-copy.elc
+  ELC      mouse-drag.elc
+  ELC      mpc.elc
+  ELC      msb.elc
+  ELC      notifications.elc
+  ELC      novice.elc
+  ELC      outline.elc
+  ELC      paren.elc
+  ELC      password-cache.elc
+  ELC      pcmpl-cvs.elc
+  ELC      pcmpl-gnu.elc
+  ELC      pcmpl-linux.elc
+  ELC      pcmpl-rpm.elc
+  ELC      pcmpl-unix.elc
+  ELC      pcmpl-x.elc
+  ELC      pcomplete.elc
+  ELC      pixel-scroll.elc
+  ELC      plstore.elc
+  ELC      printing.elc
+  ELC      proced.elc
+  ELC      profiler.elc
+  ELC      ps-bdf.elc
+  ELC      ps-def.elc
+  ELC      ps-mule.elc
+  ELC      ps-print.elc
+  ELC      ps-samp.elc
+  ELC      recentf.elc
+  ELC      rect.elc
+  ELC      registry.elc
+  ELC      repeat.elc
+  ELC      reposition.elc
+  ELC      reveal.elc
+  ELC      rot13.elc
+  ELC      rtree.elc
+  ELC      ruler-mode.elc
+  ELC      savehist.elc
+  ELC      saveplace.elc
+  ELC      sb-image.elc
+  ELC      scroll-all.elc
+  ELC      scroll-lock.elc
+  ELC      server.elc
+  ELC      ses.elc
+  ELC      shadowfile.elc
+  ELC      shell.elc
+  ELC      skeleton.elc
+  ELC      sort.elc
+  ELC      soundex.elc
+  ELC      speedbar.elc
+  ELC      strokes.elc
+  ELC      svg.elc
+  ELC      tabify.elc
+  ELC      talk.elc
+  ELC      tar-mode.elc
+  ELC      tempo.elc
+  ELC      term.elc
+  ELC      thingatpt.elc
+  ELC      thumbs.elc
+  ELC      time.elc
+  ELC      time-stamp.elc
+  ELC      timezone.elc
+  ELC      tmm.elc
+  ELC      t-mouse.elc
+  ELC      tree-widget.elc
+  ELC      tutorial.elc
+  ELC      type-break.elc
+  ELC      userlock.elc
+  ELC      vcursor.elc
+  ELC      view.elc
+  ELC      vt100-led.elc
+  ELC      vt-control.elc
+  ELC      wdired.elc
+  ELC      whitespace.elc
+  ELC      wid-browse.elc
+  ELC      wid-edit.elc
+  ELC      windmove.elc
+  ELC      winner.elc
+  ELC      woman.elc
+  ELC      xdg.elc
+  ELC      xml.elc
+  ELC      xt-mouse.elc
+  ELC      xwidget.elc
+  ELC      calc/calc-aent.elc
+  ELC      calc/calcalg2.elc
+  ELC      calc/calcalg3.elc
+  ELC      calc/calc-alg.elc
+  ELC      calc/calc-arith.elc
+  ELC      calc/calc-bin.elc
+  ELC      calc/calc-comb.elc
+  ELC      calc/calccomp.elc
+  ELC      calc/calc-cplx.elc
+  ELC      calc/calc.elc
+  ELC      calc/calc-embed.elc
+  ELC      calc/calc-ext.elc
+  ELC      calc/calc-fin.elc
+  ELC      calc/calc-forms.elc
+  ELC      calc/calc-frac.elc
+  ELC      calc/calc-funcs.elc
+  ELC      calc/calc-graph.elc
+  ELC      calc/calc-help.elc
+  ELC      calc/calc-incom.elc
+  ELC      calc/calc-keypd.elc
+  ELC      calc/calc-lang.elc
+  ELC      calc/calc-macs.elc
+  ELC      calc/calc-map.elc
+  ELC      calc/calc-math.elc
+  ELC      calc/calc-menu.elc
+  ELC      calc/calc-misc.elc
+  ELC      calc/calc-mode.elc
+  ELC      calc/calc-mtx.elc
+  ELC      calc/calc-nlfit.elc
+  ELC      calc/calc-poly.elc
+  ELC      calc/calc-prog.elc
+  ELC      calc/calc-rewr.elc
+  ELC      calc/calc-rules.elc
+  ELC      calc/calcsel2.elc
+  ELC      calc/calc-sel.elc
+  ELC      calc/calc-stat.elc
+  ELC      calc/calc-store.elc
+  ELC      calc/calc-stuff.elc
+  ELC      calc/calc-trail.elc
+  ELC      calc/calc-undo.elc
+  ELC      calc/calc-units.elc
+  ELC      calc/calc-vec.elc
+  ELC      calc/calc-yank.elc
+  ELC      calendar/appt.elc
+  ELC      calendar/cal-bahai.elc
+  ELC      calendar/cal-china.elc
+  ELC      calendar/cal-coptic.elc
+  ELC      calendar/cal-dst.elc
+  ELC      calendar/calendar.elc
+  ELC      calendar/cal-french.elc
+  ELC      calendar/cal-hebrew.elc
+  ELC      calendar/cal-html.elc
+  ELC      calendar/cal-islam.elc
+  ELC      calendar/cal-iso.elc
+  ELC      calendar/cal-julian.elc
+  ELC      calendar/cal-mayan.elc
+  ELC      calendar/cal-menu.elc
+  ELC      calendar/cal-move.elc
+  ELC      calendar/cal-persia.elc
+  ELC      calendar/cal-tex.elc
+  ELC      calendar/cal-x.elc
+  ELC      calendar/diary-lib.elc
+  ELC      calendar/holidays.elc
+  ELC      calendar/icalendar.elc
+  ELC      calendar/lunar.elc
+  ELC      calendar/parse-time.elc
+  ELC      calendar/solar.elc
+  ELC      calendar/timeclock.elc
+  ELC      calendar/time-date.elc
+  ELC      calendar/todo-mode.elc
+  ELC      cedet/cedet-cscope.elc
+  ELC      cedet/cedet.elc
+  ELC      cedet/cedet-files.elc
+  ELC      cedet/cedet-global.elc
+  ELC      cedet/cedet-idutils.elc
+  ELC      cedet/data-debug.elc
+  ELC      cedet/ede.elc
+  ELC      cedet/inversion.elc
+  ELC      cedet/mode-local.elc
+  ELC      cedet/pulse.elc
+  ELC      cedet/semantic.elc
+  ELC      cedet/srecode.elc
+  ELC      cedet/ede/autoconf-edit.elc
+  ELC      cedet/ede/auto.elc
+  ELC      cedet/ede/base.elc
+  ELC      cedet/ede/config.elc
+  ELC      cedet/ede/cpp-root.elc
+  ELC      cedet/ede/custom.elc
+  ELC      cedet/ede/detect.elc
+  ELC      cedet/ede/dired.elc
+  ELC      cedet/ede/emacs.elc
+  ELC      cedet/ede/files.elc
+  ELC      cedet/ede/generic.elc
+  ELC      cedet/ede/linux.elc
+  ELC      cedet/ede/locate.elc
+  ELC      cedet/ede/make.elc
+  ELC      cedet/ede/makefile-edit.elc
+  ELC      cedet/ede/pconf.elc
+  ELC      cedet/ede/pmake.elc
+  ELC      cedet/ede/proj-archive.elc
+  ELC      cedet/ede/proj-aux.elc
+  ELC      cedet/ede/proj-comp.elc
+  ELC      cedet/ede/project-am.elc
+  ELC      cedet/ede/proj.elc
+  ELC      cedet/ede/proj-elisp.elc
+  ELC      cedet/ede/proj-info.elc
+  ELC      cedet/ede/proj-misc.elc
+  ELC      cedet/ede/proj-obj.elc
+  ELC      cedet/ede/proj-prog.elc
+  ELC      cedet/ede/proj-scheme.elc
+  ELC      cedet/ede/proj-shared.elc
+  ELC      cedet/ede/shell.elc
+  ELC      cedet/ede/simple.elc
+  ELC      cedet/ede/source.elc
+  ELC      cedet/ede/speedbar.elc
+  ELC      cedet/ede/srecode.elc
+  ELC      cedet/ede/system.elc
+  ELC      cedet/ede/util.elc
+  ELC      cedet/semantic/analyze.elc
+  ELC      cedet/semantic/bovine.elc
+  ELC      cedet/semantic/chart.elc
+  ELC      cedet/semantic/complete.elc
+  ELC      cedet/semantic/ctxt.elc
+  ELC      cedet/semantic/db-debug.elc
+  ELC      cedet/semantic/db-ebrowse.elc
+  ELC      cedet/semantic/db.elc
+  ELC      cedet/semantic/db-el.elc
+  ELC      cedet/semantic/db-file.elc
+  ELC      cedet/semantic/db-find.elc
+  ELC      cedet/semantic/db-global.elc
+  ELC      cedet/semantic/db-javascript.elc
+  ELC      cedet/semantic/db-mode.elc
+  ELC      cedet/semantic/db-ref.elc
+  ELC      cedet/semantic/db-typecache.elc
+  ELC      cedet/semantic/debug.elc
+  ELC      cedet/semantic/decorate.elc
+  ELC      cedet/semantic/dep.elc
+  ELC      cedet/semantic/doc.elc
+  ELC      cedet/semantic/ede-grammar.elc
+  ELC      cedet/semantic/edit.elc
+  ELC      cedet/semantic/find.elc
+  ELC      cedet/semantic/format.elc
+  ELC      cedet/semantic/fw.elc
+  ELC      cedet/semantic/grammar.elc
+  ELC      cedet/semantic/grammar-wy.elc
+  ELC      cedet/semantic/html.elc
+  ELC      cedet/semantic/ia.elc
+  ELC      cedet/semantic/ia-sb.elc
+  ELC      cedet/semantic/idle.elc
+  ELC      cedet/semantic/imenu.elc
+  ELC      cedet/semantic/java.elc
+  ELC      cedet/semantic/lex.elc
+  ELC      cedet/semantic/lex-spp.elc
+  ELC      cedet/semantic/mru-bookmark.elc
+  ELC      cedet/semantic/sb.elc
+  ELC      cedet/semantic/scope.elc
+  ELC      cedet/semantic/senator.elc
+  ELC      cedet/semantic/sort.elc
+  ELC      cedet/semantic/symref.elc
+  ELC      cedet/semantic/tag.elc
+  ELC      cedet/semantic/tag-file.elc
+  ELC      cedet/semantic/tag-ls.elc
+  ELC      cedet/semantic/tag-write.elc
+  ELC      cedet/semantic/texi.elc
+  ELC      cedet/semantic/util.elc
+  ELC      cedet/semantic/util-modes.elc
+  ELC      cedet/semantic/wisent.elc
+  ELC      cedet/semantic/analyze/complete.elc
+  ELC      cedet/semantic/analyze/debug.elc
+  ELC      cedet/semantic/analyze/fcn.elc
+  ELC      cedet/semantic/analyze/refs.elc
+  ELC      cedet/semantic/bovine/c-by.elc
+  ELC      cedet/semantic/bovine/c.elc
+  ELC      cedet/semantic/bovine/debug.elc
+  ELC      cedet/semantic/bovine/el.elc
+  ELC      cedet/semantic/bovine/gcc.elc
+  ELC      cedet/semantic/bovine/grammar.elc
+  ELC      cedet/semantic/bovine/make-by.elc
+  ELC      cedet/semantic/bovine/make.elc
+  ELC      cedet/semantic/bovine/scm-by.elc
+  ELC      cedet/semantic/bovine/scm.elc
+  ELC      cedet/semantic/decorate/include.elc
+  ELC      cedet/semantic/decorate/mode.elc
+  ELC      cedet/semantic/symref/cscope.elc
+  ELC      cedet/semantic/symref/filter.elc
+  ELC      cedet/semantic/symref/global.elc
+  ELC      cedet/semantic/symref/grep.elc
+  ELC      cedet/semantic/symref/idutils.elc
+  ELC      cedet/semantic/symref/list.elc
+  ELC      cedet/semantic/wisent/comp.elc
+  ELC      cedet/semantic/wisent/grammar.elc
+  ELC      cedet/semantic/wisent/javascript.elc
+  ELC      cedet/semantic/wisent/java-tags.elc
+  ELC      cedet/semantic/wisent/javat-wy.elc
+  ELC      cedet/semantic/wisent/js-wy.elc
+  ELC      cedet/semantic/wisent/python.elc
+  ELC      cedet/semantic/wisent/python-wy.elc
+  ELC      cedet/semantic/wisent/wisent.elc
+  ELC      cedet/srecode/args.elc
+  ELC      cedet/srecode/compile.elc
+  ELC      cedet/srecode/cpp.elc
+  ELC      cedet/srecode/ctxt.elc
+  ELC      cedet/srecode/dictionary.elc
+  ELC      cedet/srecode/document.elc
+  ELC      cedet/srecode/el.elc
+  ELC      cedet/srecode/expandproto.elc
+  ELC      cedet/srecode/extract.elc
+  ELC      cedet/srecode/fields.elc
+  ELC      cedet/srecode/filters.elc
+  ELC      cedet/srecode/find.elc
+  ELC      cedet/srecode/getset.elc
+  ELC      cedet/srecode/insert.elc
+  ELC      cedet/srecode/java.elc
+  ELC      cedet/srecode/map.elc
+  ELC      cedet/srecode/mode.elc
+  ELC      cedet/srecode/semantic.elc
+  ELC      cedet/srecode/srt.elc
+  ELC      cedet/srecode/srt-mode.elc
+  ELC      cedet/srecode/srt-wy.elc
+  ELC      cedet/srecode/table.elc
+  ELC      cedet/srecode/template.elc
+  ELC      cedet/srecode/texi.elc
+  ELC      emacs-lisp/advice.elc
+  ELC      emacs-lisp/avl-tree.elc
+  ELC      emacs-lisp/benchmark.elc
+  ELC      emacs-lisp/bindat.elc
+  ELC      emacs-lisp/chart.elc
+  ELC      emacs-lisp/check-declare.elc
+  ELC      emacs-lisp/checkdoc.elc
+  ELC      emacs-lisp/cl.elc
+  ELC      emacs-lisp/cl-extra.elc
+  ELC      emacs-lisp/cl-indent.elc
+  ELC      emacs-lisp/cl-lib.elc
+  ELC      emacs-lisp/cl-macs.elc
+  ELC      emacs-lisp/cl-print.elc
+  ELC      emacs-lisp/cl-seq.elc
+  ELC      emacs-lisp/copyright.elc
+  ELC      emacs-lisp/crm.elc
+  ELC      emacs-lisp/cursor-sensor.elc
+  ELC      emacs-lisp/debug.elc
+  ELC      emacs-lisp/derived.elc
+  ELC      emacs-lisp/disass.elc
+  ELC      emacs-lisp/easymenu.elc
+  ELC      emacs-lisp/easy-mmode.elc
+  ELC      emacs-lisp/edebug.elc
+  ELC      emacs-lisp/eieio-base.elc
+  ELC      emacs-lisp/eieio-compat.elc
+  ELC      emacs-lisp/eieio-core.elc
+  ELC      emacs-lisp/eieio-custom.elc
+  ELC      emacs-lisp/eieio-datadebug.elc
+  ELC      emacs-lisp/eieio.elc
+  ELC      emacs-lisp/eieio-opt.elc
+  ELC      emacs-lisp/eieio-speedbar.elc
+  ELC      emacs-lisp/elint.elc
+  ELC      emacs-lisp/elp.elc
+  ELC      emacs-lisp/ert.elc
+  ELC      emacs-lisp/ert-x.elc
+  ELC      emacs-lisp/ewoc.elc
+  ELC      emacs-lisp/find-func.elc
+  ELC      emacs-lisp/generator.elc
+  ELC      emacs-lisp/generic.elc
+  ELC      emacs-lisp/gv.elc
+  ELC      emacs-lisp/helper.elc
+  ELC      emacs-lisp/inline.elc
+  ELC      emacs-lisp/let-alist.elc
+  ELC      emacs-lisp/lisp-mnt.elc
+  ELC      emacs-lisp/map.elc
+  ELC      emacs-lisp/package.elc
+  ELC      emacs-lisp/package-x.elc
+  ELC      emacs-lisp/pcase.elc
+  ELC      emacs-lisp/pp.elc
+  ELC      emacs-lisp/radix-tree.elc
+  ELC      emacs-lisp/re-builder.elc
+  ELC      emacs-lisp/regi.elc
+  ELC      emacs-lisp/ring.elc
+  ELC      emacs-lisp/rmc.elc
+  ELC      emacs-lisp/rx.elc
+  ELC      emacs-lisp/seq.elc
+  ELC      emacs-lisp/shadow.elc
+  ELC      emacs-lisp/smie.elc
+  ELC      emacs-lisp/subr-x.elc
+  ELC      emacs-lisp/tcover-ses.elc
+  ELC      emacs-lisp/tcover-unsafep.elc
+  ELC      emacs-lisp/testcover.elc
+  ELC      emacs-lisp/thunk.elc
+  ELC      emacs-lisp/timer-list.elc
+  ELC      emacs-lisp/tq.elc
+  ELC      emacs-lisp/trace.elc
+  ELC      emacs-lisp/unsafep.elc
+  ELC      emacs-lisp/warnings.elc
+  ELC      emulation/cua-base.elc
+  ELC      emulation/cua-gmrk.elc
+  ELC      emulation/cua-rect.elc
+  ELC      emulation/edt.elc
+  ELC      emulation/edt-lk201.elc
+  ELC      emulation/edt-mapper.elc
+  ELC      emulation/edt-pc.elc
+  ELC      emulation/edt-vt100.elc
+  ELC      emulation/keypad.elc
+  ELC      emulation/viper-cmd.elc
+  ELC      emulation/viper.elc
+  ELC      emulation/viper-ex.elc
+  ELC      emulation/viper-init.elc
+  ELC      emulation/viper-keym.elc
+  ELC      emulation/viper-macs.elc
+  ELC      emulation/viper-mous.elc
+  ELC      emulation/viper-util.elc
+  ELC      erc/erc-autoaway.elc
+  ELC      erc/erc-backend.elc
+  ELC      erc/erc-button.elc
+  ELC      erc/erc-capab.elc
+  ELC      erc/erc-compat.elc
+  ELC      erc/erc-dcc.elc
+  ELC      erc/erc-desktop-notifications.elc
+  ELC      erc/erc.elc
+  ELC      erc/erc-ezbounce.elc
+  ELC      erc/erc-fill.elc
+  ELC      erc/erc-goodies.elc
+  ELC      erc/erc-ibuffer.elc
+  ELC      erc/erc-identd.elc
+  ELC      erc/erc-imenu.elc
+  ELC      erc/erc-join.elc
+  ELC      erc/erc-lang.elc
+  ELC      erc/erc-list.elc
+  ELC      erc/erc-log.elc
+  ELC      erc/erc-match.elc
+  ELC      erc/erc-menu.elc
+  ELC      erc/erc-netsplit.elc
+  ELC      erc/erc-networks.elc
+  ELC      erc/erc-notify.elc
+  ELC      erc/erc-page.elc
+  ELC      erc/erc-pcomplete.elc
+  ELC      erc/erc-replace.elc
+  ELC      erc/erc-ring.elc
+  ELC      erc/erc-services.elc
+  ELC      erc/erc-sound.elc
+  ELC      erc/erc-speedbar.elc
+  ELC      erc/erc-spelling.elc
+  ELC      erc/erc-stamp.elc
+  ELC      erc/erc-track.elc
+  ELC      erc/erc-truncate.elc
+  ELC      erc/erc-xdcc.elc
+  ELC      eshell/em-alias.elc
+  ELC      eshell/em-banner.elc
+  ELC      eshell/em-basic.elc
+  ELC      eshell/em-cmpl.elc
+  ELC      eshell/em-dirs.elc
+  ELC      eshell/em-glob.elc
+  ELC      eshell/em-hist.elc
+  ELC      eshell/em-ls.elc
+  ELC      eshell/em-pred.elc
+  ELC      eshell/em-prompt.elc
+  ELC      eshell/em-rebind.elc
+  ELC      eshell/em-script.elc
+  ELC      eshell/em-smart.elc
+  ELC      eshell/em-term.elc
+  ELC      eshell/em-tramp.elc
+  ELC      eshell/em-unix.elc
+  ELC      eshell/em-xtra.elc
+  ELC      eshell/esh-arg.elc
+  ELC      eshell/esh-cmd.elc
+  ELC      eshell/eshell.elc
+  ELC      eshell/esh-ext.elc
+  ELC      eshell/esh-io.elc
+  ELC      eshell/esh-mode.elc
+  ELC      eshell/esh-module.elc
+  ELC      eshell/esh-opt.elc
+  ELC      eshell/esh-proc.elc
+  ELC      eshell/esh-util.elc
+  ELC      eshell/esh-var.elc
+  ELC      gnus/canlock.elc
+  ELC      gnus/deuglify.elc
+  ELC      gnus/gmm-utils.elc
+  ELC      gnus/gnus-agent.elc
+  ELC      gnus/gnus-art.elc
+  ELC      gnus/gnus-async.elc
+  ELC      gnus/gnus-bcklg.elc
+  ELC      gnus/gnus-bookmark.elc
+  ELC      gnus/gnus-cache.elc
+  ELC      gnus/gnus-cite.elc
+  ELC      gnus/gnus-cloud.elc
+  ELC      gnus/gnus-cus.elc
+  ELC      gnus/gnus-delay.elc
+  ELC      gnus/gnus-demon.elc
+  ELC      gnus/gnus-diary.elc
+  ELC      gnus/gnus-dired.elc
+  ELC      gnus/gnus-draft.elc
+  ELC      gnus/gnus-dup.elc
+  ELC      gnus/gnus-eform.elc
+  ELC      gnus/gnus.elc
+  ELC      gnus/gnus-fun.elc
+  ELC      gnus/gnus-gravatar.elc
+  ELC      gnus/gnus-group.elc
+  ELC      gnus/gnus-html.elc
+  ELC      gnus/gnus-icalendar.elc
+  ELC      gnus/gnus-int.elc
+  ELC      gnus/gnus-kill.elc
+  ELC      gnus/gnus-logic.elc
+  ELC      gnus/gnus-mh.elc
+  ELC      gnus/gnus-ml.elc
+  ELC      gnus/gnus-mlspl.elc
+  ELC      gnus/gnus-msg.elc
+  ELC      gnus/gnus-notifications.elc
+  ELC      gnus/gnus-picon.elc
+  ELC      gnus/gnus-range.elc
+  ELC      gnus/gnus-registry.elc
+  ELC      gnus/gnus-rfc1843.elc
+  ELC      gnus/gnus-salt.elc
+  ELC      gnus/gnus-score.elc
+  ELC      gnus/gnus-sieve.elc
+  ELC      gnus/gnus-spec.elc
+  ELC      gnus/gnus-srvr.elc
+  ELC      gnus/gnus-start.elc
+  ELC      gnus/gnus-sum.elc
+  ELC      gnus/gnus-topic.elc
+  ELC      gnus/gnus-undo.elc
+  ELC      gnus/gnus-util.elc
+  ELC      gnus/gnus-uu.elc
+  ELC      gnus/gnus-vm.elc
+  ELC      gnus/gnus-win.elc
+  ELC      gnus/gssapi.elc
+  ELC      gnus/legacy-gnus-agent.elc
+  ELC      gnus/mail-source.elc
+  ELC      gnus/message.elc
+  ELC      gnus/mm-archive.elc
+  ELC      gnus/mm-bodies.elc
+  ELC      gnus/mm-decode.elc
+  ELC      gnus/mm-encode.elc
+  ELC      gnus/mm-extern.elc
+  ELC      gnus/mml1991.elc
+  ELC      gnus/mml2015.elc
+  ELC      gnus/mml.elc
+  ELC      gnus/mml-sec.elc
+  ELC      gnus/mml-smime.elc
+  ELC      gnus/mm-partial.elc
+  ELC      gnus/mm-url.elc
+  ELC      gnus/mm-util.elc
+  ELC      gnus/mm-uu.elc
+  ELC      gnus/mm-view.elc
+  ELC      gnus/nnagent.elc
+  ELC      gnus/nnbabyl.elc
+  ELC      gnus/nndiary.elc
+  ELC      gnus/nndir.elc
+  ELC      gnus/nndoc.elc
+  ELC      gnus/nndraft.elc
+  ELC      gnus/nneething.elc
+  ELC      gnus/nnfolder.elc
+  ELC      gnus/nngateway.elc
+  ELC      gnus/nnheader.elc
+  ELC      gnus/nnimap.elc
+  ELC      gnus/nnir.elc
+  ELC      gnus/nnmaildir.elc
+  ELC      gnus/nnmail.elc
+  ELC      gnus/nnmairix.elc
+  ELC      gnus/nnmbox.elc
+  ELC      gnus/nnmh.elc
+  ELC      gnus/nnml.elc
+  ELC      gnus/nnnil.elc
+  ELC      gnus/nnoo.elc
+  ELC      gnus/nnregistry.elc
+  ELC      gnus/nnrss.elc
+  ELC      gnus/nnspool.elc
+  ELC      gnus/nntp.elc
+  ELC      gnus/nnvirtual.elc
+  ELC      gnus/nnweb.elc
+  ELC      gnus/score-mode.elc
+  ELC      gnus/smiley.elc
+  ELC      gnus/smime.elc
+  ELC      gnus/spam.elc
+  ELC      gnus/spam-report.elc
+  ELC      gnus/spam-stat.elc
+  ELC      gnus/spam-wash.elc
+  ELC      image/compface.elc
+  ELC      image/gravatar.elc
+  ELC      international/ccl.elc
+  ELC      international/isearch-x.elc
+  ELC      international/iso-ascii.elc
+  ELC      international/iso-cvt.elc
+  ELC      international/iso-transl.elc
+  ELC      international/ja-dic-cnv.elc
+  ELC      international/ja-dic-utl.elc
+  ELC      international/kinsoku.elc
+  ELC      international/kkc.elc
+  ELC      international/latexenc.elc
+  ELC      international/latin1-disp.elc
+  ELC      international/mule-diag.elc
+  ELC      international/ogonek.elc
+  ELC      international/quail.elc
+  ELC      international/rfc1843.elc
+  ELC      international/robin.elc
+  ELC      international/titdic-cnv.elc
+  ELC      international/utf-7.elc
+  ELC      international/utf7.elc
+  ELC      language/china-util.elc
+  ELC      language/cyril-util.elc
+  ELC      language/ethio-util.elc
+  ELC      language/hanja-util.elc
+  ELC      language/ind-util.elc
+  ELC      language/japan-util.elc
+  ELC      language/korea-util.elc
+  ELC      language/lao-util.elc
+  ELC      language/thai-util.elc
+  ELC      language/thai-word.elc
+  ELC      language/tibet-util.elc
+  ELC      language/tv-util.elc
+  ELC      language/viet-util.elc
+  ELC      leim/ja-dic/ja-dic.elc
+  ELC      leim/quail/4Corner.elc
+  ELC      leim/quail/arabic.elc
+  ELC      leim/quail/ARRAY30.elc
+  ELC      leim/quail/CCDOSPY.elc
+  ELC      leim/quail/croatian.elc
+  ELC      leim/quail/CTLau-b5.elc
+  ELC      leim/quail/CTLau.elc
+  ELC      leim/quail/cyril-jis.elc
+  ELC      leim/quail/cyrillic.elc
+  ELC      leim/quail/czech.elc
+  ELC      leim/quail/ECDICT.elc
+  ELC      leim/quail/ethiopic.elc
+  ELC      leim/quail/ETZY.elc
+  ELC      leim/quail/georgian.elc
+  ELC      leim/quail/greek.elc
+  ELC      leim/quail/hangul.elc
+  ELC      leim/quail/hanja3.elc
+  ELC      leim/quail/hanja.elc
+  ELC      leim/quail/hanja-jis.elc
+  ELC      leim/quail/hebrew.elc
+  ELC      leim/quail/indian.elc
+  ELC      leim/quail/ipa.elc
+  ELC      leim/quail/ipa-praat.elc
+  ELC      leim/quail/japanese.elc
+  ELC      leim/quail/lao.elc
+  ELC      leim/quail/latin-alt.elc
+  ELC      leim/quail/latin-ltx.elc
+  ELC      leim/quail/latin-post.elc
+  ELC      leim/quail/latin-pre.elc
+  ELC      leim/quail/lrt.elc
+  ELC      leim/quail/persian.elc
+  ELC      leim/quail/programmer-dvorak.elc
+  ELC      leim/quail/Punct-b5.elc
+  ELC      leim/quail/Punct.elc
+  ELC      leim/quail/PY-b5.elc
+  ELC      leim/quail/PY.elc
+  ELC      leim/quail/pypunct-b5.elc
+  ELC      leim/quail/py-punct.elc
+  ELC      leim/quail/QJ-b5.elc
+  ELC      leim/quail/QJ.elc
+  ELC      leim/quail/quick-b5.elc
+  ELC      leim/quail/quick-cns.elc
+  ELC      leim/quail/rfc1345.elc
+  ELC      leim/quail/sgml-input.elc
+  ELC      leim/quail/sisheng.elc
+  ELC      leim/quail/slovak.elc
+  ELC      leim/quail/SW.elc
+  ELC      leim/quail/symbol-ksc.elc
+  ELC      leim/quail/tamil-dvorak.elc
+  ELC      leim/quail/thai.elc
+  ELC      leim/quail/tibetan.elc
+  ELC      leim/quail/TONEPY.elc
+  ELC      leim/quail/tsang-b5.elc
+  ELC      leim/quail/tsang-cns.elc
+  ELC      leim/quail/uni-input.elc
+  ELC      leim/quail/viqr.elc
+  ELC      leim/quail/vntelex.elc
+  ELC      leim/quail/vnvni.elc
+  ELC      leim/quail/welsh.elc
+  ELC      leim/quail/ZIRANMA.elc
+  ELC      leim/quail/ZOZY.elc
+  ELC      mail/binhex.elc
+  ELC      mail/emacsbug.elc
+  ELC      mail/feedmail.elc
+  ELC      mail/flow-fill.elc
+  ELC      mail/footnote.elc
+  ELC      mail/hashcash.elc
+  ELC      mail/ietf-drums.elc
+  ELC      mail/mailabbrev.elc
+  ELC      mail/mailalias.elc
+  ELC      mail/mailclient.elc
+  ELC      mail/mail-extr.elc
+  ELC      mail/mailheader.elc
+  ELC      mail/mail-hist.elc
+  ELC      mail/mail-parse.elc
+  ELC      mail/mail-prsvr.elc
+  ELC      mail/mail-utils.elc
+  ELC      mail/metamail.elc
+  ELC      mail/mspools.elc
+  ELC      mail/qp.elc
+  ELC      mail/reporter.elc
+  ELC      mail/rfc2045.elc
+  ELC      mail/rfc2047.elc
+  ELC      mail/rfc2231.elc
+  ELC      mail/rfc2368.elc
+  ELC      mail/rfc822.elc
+  ELC      mail/rmailedit.elc
+  ELC      mail/rmail.elc
+  ELC      mail/rmailkwd.elc
+  ELC      mail/rmailmm.elc
+  ELC      mail/rmailmsc.elc
+  ELC      mail/rmailout.elc
+  ELC      mail/rmailsort.elc
+  ELC      mail/rmail-spam-filter.elc
+  ELC      mail/rmailsum.elc
+  ELC      mail/sendmail.elc
+  ELC      mail/smtpmail.elc
+  ELC      mail/supercite.elc
+  ELC      mail/uce.elc
+  ELC      mail/undigest.elc
+  ELC      mail/unrmail.elc
+  ELC      mail/uudecode.elc
+  ELC      mail/yenc.elc
+  ELC      mh-e/mh-alias.elc
+  ELC      mh-e/mh-buffers.elc
+  ELC      mh-e/mh-compat.elc
+  ELC      mh-e/mh-comp.elc
+  ELC      mh-e/mh-e.elc
+  ELC      mh-e/mh-folder.elc
+  ELC      mh-e/mh-funcs.elc
+  ELC      mh-e/mh-gnus.elc
+  ELC      mh-e/mh-identity.elc
+  ELC      mh-e/mh-inc.elc
+  ELC      mh-e/mh-junk.elc
+  ELC      mh-e/mh-letter.elc
+  ELC      mh-e/mh-limit.elc
+  ELC      mh-e/mh-mime.elc
+  ELC      mh-e/mh-print.elc
+  ELC      mh-e/mh-scan.elc
+  ELC      mh-e/mh-search.elc
+  ELC      mh-e/mh-seq.elc
+  ELC      mh-e/mh-show.elc
+  ELC      mh-e/mh-speed.elc
+  ELC      mh-e/mh-thread.elc
+  ELC      mh-e/mh-tool-bar.elc
+  ELC      mh-e/mh-utils.elc
+  ELC      mh-e/mh-xface.elc
+  ELC      net/ange-ftp.elc
+  ELC      net/browse-url.elc
+  ELC      net/dbus.elc
+  ELC      net/dig.elc
+  ELC      net/dns.elc
+  ELC      net/eudcb-bbdb.elc
+  ELC      net/eudcb-ldap.elc
+  ELC      net/eudcb-mab.elc
+  ELC      net/eudc-bob.elc
+  ELC      net/eudc.elc
+  ELC      net/eudc-export.elc
+  ELC      net/eudc-hotlist.elc
+  ELC      net/eudc-vars.elc
+  ELC      net/eww.elc
+  ELC      net/gnutls.elc
+  ELC      net/goto-addr.elc
+  ELC      net/hmac-def.elc
+  ELC      net/hmac-md5.elc
+  ELC      net/imap.elc
+  ELC      net/ldap.elc
+  ELC      net/mailcap.elc
+  ELC      net/mairix.elc
+  ELC      net/netrc.elc
+  ELC      net/net-utils.elc
+  ELC      net/network-stream.elc
+  ELC      net/newst-backend.elc
+  ELC      net/newsticker.elc
+  ELC      net/newst-plainview.elc
+  ELC      net/newst-reader.elc
+  ELC      net/newst-ticker.elc
+  ELC      net/newst-treeview.elc
+  ELC      net/nsm.elc
+  ELC      net/ntlm.elc
+  ELC      net/pop3.elc
+  ELC      net/puny.elc
+  ELC      net/quickurl.elc
+  ELC      net/rcirc.elc
+  ELC      net/rfc2104.elc
+  ELC      net/rlogin.elc
+  ELC      net/sasl-cram.elc
+  ELC      net/sasl-digest.elc
+  ELC      net/sasl.elc
+  ELC      net/sasl-ntlm.elc
+  ELC      net/sasl-scram-rfc.elc
+  ELC      net/secrets.elc
+  ELC      net/shr-color.elc
+  ELC      net/shr.elc
+  ELC      net/sieve.elc
+  ELC      net/sieve-manage.elc
+  ELC      net/sieve-mode.elc
+  ELC      net/snmp-mode.elc
+  ELC      net/soap-client.elc
+  ELC      net/soap-inspect.elc
+  ELC      net/socks.elc
+  ELC      net/starttls.elc
+  ELC      net/telnet.elc
+  ELC      net/tls.elc
+  ELC      net/tramp-adb.elc
+  ELC      net/tramp-cache.elc
+  ELC      net/tramp-cmds.elc
+  ELC      net/tramp-compat.elc
+  ELC      net/tramp.elc
+  ELC      net/tramp-ftp.elc
+  ELC      net/tramp-gvfs.elc
+  ELC      net/tramp-sh.elc
+  ELC      net/tramp-smb.elc
+  ELC      net/tramp-uu.elc
+  ELC      net/trampver.elc
+  ELC      net/webjump.elc
+  ELC      net/zeroconf.elc
+  ELC      nxml/nxml-enc.elc
+  ELC      nxml/nxml-maint.elc
+  ELC      nxml/nxml-mode.elc
+  ELC      nxml/nxml-ns.elc
+  ELC      nxml/nxml-outln.elc
+  ELC      nxml/nxml-parse.elc
+  ELC      nxml/nxml-rap.elc
+  ELC      nxml/nxml-util.elc
+  ELC      nxml/rng-cmpct.elc
+  ELC      nxml/rng-dt.elc
+  ELC      nxml/rng-loc.elc
+  ELC      nxml/rng-maint.elc
+  ELC      nxml/rng-match.elc
+  ELC      nxml/rng-nxml.elc
+  ELC      nxml/rng-parse.elc
+  ELC      nxml/rng-pttrn.elc
+  ELC      nxml/rng-uri.elc
+  ELC      nxml/rng-util.elc
+  ELC      nxml/rng-valid.elc
+  ELC      nxml/rng-xsd.elc
+  ELC      nxml/xmltok.elc
+  ELC      nxml/xsd-regexp.elc
+  ELC      obsolete/abbrevlist.elc
+  ELC      obsolete/assoc.elc
+  ELC      obsolete/bruce.elc
+  ELC      obsolete/cc-compat.elc
+  ELC      obsolete/cl-compat.elc
+  ELC      obsolete/complete.elc
+  ELC      obsolete/crisp.elc
+  ELC      obsolete/cust-print.elc
+  ELC      obsolete/erc-hecomplete.elc
+  ELC      obsolete/eudcb-ph.elc
+  ELC      obsolete/fast-lock.elc
+  ELC      obsolete/gs.elc
+  ELC      obsolete/gulp.elc
+  ELC      obsolete/html2text.elc
+  ELC      obsolete/iswitchb.elc
+  ELC      obsolete/landmark.elc
+  ELC      obsolete/lazy-lock.elc
+  ELC      obsolete/ledit.elc
+  ELC      obsolete/levents.elc
+  ELC      obsolete/lmenu.elc
+  ELC      obsolete/longlines.elc
+  ELC      obsolete/lucid.elc
+  ELC      obsolete/mailpost.elc
+  ELC      obsolete/meese.elc
+  ELC      obsolete/mouse-sel.elc
+  ELC      obsolete/old-emacs-lock.elc
+  ELC      obsolete/old-whitespace.elc
+  ELC      obsolete/options.elc
+  ELC      obsolete/otodo-mode.elc
+  ELC      obsolete/patcomp.elc
+  ELC      obsolete/pc-mode.elc
+  ELC      obsolete/pc-select.elc
+  ELC      obsolete/pgg-def.elc
+  ELC      obsolete/pgg.elc
+  ELC      obsolete/pgg-gpg.elc
+  ELC      obsolete/pgg-parse.elc
+  ELC      obsolete/pgg-pgp5.elc
+  ELC      obsolete/pgg-pgp.elc
+  ELC      obsolete/rcompile.elc
+  ELC      obsolete/sregex.elc
+  ELC      obsolete/s-region.elc
+  ELC      obsolete/sup-mouse.elc
+  ELC      obsolete/terminal.elc
+  ELC      obsolete/tpu-edt.elc
+  ELC      obsolete/tpu-extras.elc
+  ELC      obsolete/tpu-mapper.elc
+  ELC      obsolete/vc-arch.elc
+  ELC      obsolete/vi.elc
+  ELC      obsolete/vip.elc
+  ELC      obsolete/ws-mode.elc
+  ELC      obsolete/xesam.elc
+  ELC      obsolete/yow.elc
+  ELC      org/ob-abc.elc
+  ELC      org/ob-asymptote.elc
+  ELC      org/ob-awk.elc
+  ELC      org/ob-calc.elc
+  ELC      org/ob-C.elc
+  ELC      org/ob-clojure.elc
+  ELC      org/ob-comint.elc
+  ELC      org/ob-coq.elc
+  ELC      org/ob-core.elc
+  ELC      org/ob-css.elc
+  ELC      org/ob-ditaa.elc
+  ELC      org/ob-dot.elc
+  ELC      org/ob-ebnf.elc
+  ELC      org/ob.elc
+  ELC      org/ob-emacs-lisp.elc
+  ELC      org/ob-eval.elc
+  ELC      org/ob-exp.elc
+  ELC      org/ob-forth.elc
+  ELC      org/ob-fortran.elc
+  ELC      org/ob-gnuplot.elc
+  ELC      org/ob-groovy.elc
+  ELC      org/ob-haskell.elc
+  ELC      org/ob-hledger.elc
+  ELC      org/ob-io.elc
+  ELC      org/ob-java.elc
+  ELC      org/ob-J.elc
+  ELC      org/ob-js.elc
+  ELC      org/ob-keys.elc
+  ELC      org/ob-latex.elc
+  ELC      org/ob-ledger.elc
+  ELC      org/ob-lilypond.elc
+  ELC      org/ob-lisp.elc
+  ELC      org/ob-lob.elc
+  ELC      org/ob-lua.elc
+  ELC      org/ob-makefile.elc
+  ELC      org/ob-matlab.elc
+  ELC      org/ob-maxima.elc
+  ELC      org/ob-mscgen.elc
+  ELC      org/ob-ocaml.elc
+  ELC      org/ob-octave.elc
+  ELC      org/ob-org.elc
+  ELC      org/ob-perl.elc
+  ELC      org/ob-picolisp.elc
+  ELC      org/ob-plantuml.elc
+  ELC      org/ob-processing.elc
+  ELC      org/ob-python.elc
+  ELC      org/ob-ref.elc
+  ELC      org/ob-R.elc
+  ELC      org/ob-ruby.elc
+  ELC      org/ob-sass.elc
+  ELC      org/ob-scheme.elc
+  ELC      org/ob-screen.elc
+  ELC      org/ob-sed.elc
+  ELC      org/ob-shell.elc
+  ELC      org/ob-shen.elc
+  ELC      org/ob-sql.elc
+  ELC      org/ob-sqlite.elc
+  ELC      org/ob-stan.elc
+  ELC      org/ob-table.elc
+  ELC      org/ob-tangle.elc
+  ELC      org/ob-vala.elc
+  ELC      org/org-agenda.elc
+  ELC      org/org-archive.elc
+  ELC      org/org-attach.elc
+  ELC      org/org-bbdb.elc
+  ELC      org/org-bibtex.elc
+  ELC      org/org-capture.elc
+  ELC      org/org-clock.elc
+  ELC      org/org-colview.elc
+  ELC      org/org-compat.elc
+  ELC      org/org-crypt.elc
+  ELC      org/org-ctags.elc
+  ELC      org/org-datetree.elc
+  ELC      org/org-docview.elc
+  ELC      org/org-duration.elc
+  ELC      org/org.elc
+  ELC      org/org-element.elc
+  ELC      org/org-entities.elc
+  ELC      org/org-eshell.elc
+  ELC      org/org-eww.elc
+  ELC      org/org-faces.elc
+  ELC      org/org-feed.elc
+  ELC      org/org-footnote.elc
+  ELC      org/org-gnus.elc
+  ELC      org/org-habit.elc
+  ELC      org/org-id.elc
+  ELC      org/org-indent.elc
+  ELC      org/org-info.elc
+  ELC      org/org-inlinetask.elc
+  ELC      org/org-irc.elc
+  ELC      org/org-lint.elc
+  ELC      org/org-list.elc
+  ELC      org/org-macro.elc
+  ELC      org/org-macs.elc
+  ELC      org/org-mhe.elc
+  ELC      org/org-mobile.elc
+  ELC      org/org-mouse.elc
+  ELC      org/org-pcomplete.elc
+  ELC      org/org-plot.elc
+  ELC      org/org-protocol.elc
+  ELC      org/org-rmail.elc
+  ELC      org/org-src.elc
+  ELC      org/org-table.elc
+  ELC      org/org-timer.elc
+  ELC      org/org-w3m.elc
+  ELC      org/ox-ascii.elc
+  ELC      org/ox-beamer.elc
+  ELC      org/ox.elc
+  ELC      org/ox-html.elc
+  ELC      org/ox-icalendar.elc
+  ELC      org/ox-latex.elc
+  ELC      org/ox-man.elc
+  ELC      org/ox-md.elc
+  ELC      org/ox-odt.elc
+  ELC      org/ox-org.elc
+  ELC      org/ox-publish.elc
+  ELC      org/ox-texinfo.elc
+  ELC      play/5x5.elc
+  ELC      play/animate.elc
+  ELC      play/blackbox.elc
+  ELC      play/bubbles.elc
+  ELC      play/cookie1.elc
+  ELC      play/decipher.elc
+  ELC      play/dissociate.elc
+  ELC      play/doctor.elc
+  ELC      play/dunnet.elc
+  ELC      play/fortune.elc
+  ELC      play/gamegrid.elc
+  ELC      play/gametree.elc
+  ELC      play/gomoku.elc
+  ELC      play/handwrite.elc
+  ELC      play/hanoi.elc
+  ELC      play/life.elc
+  ELC      play/morse.elc
+  ELC      play/mpuz.elc
+  ELC      play/pong.elc
+  ELC      play/snake.elc
+  ELC      play/solitaire.elc
+  ELC      play/spook.elc
+  ELC      play/studly.elc
+  ELC      play/tetris.elc
+  ELC      play/zone.elc
+  ELC      progmodes/ada-mode.elc
+  ELC      progmodes/ada-prj.elc
+  ELC      progmodes/ada-stmt.elc
+  ELC      progmodes/ada-xref.elc
+  ELC      progmodes/antlr-mode.elc
+  ELC      progmodes/asm-mode.elc
+  ELC      progmodes/autoconf.elc
+  ELC      progmodes/bat-mode.elc
+  ELC      progmodes/bug-reference.elc
+  ELC      progmodes/cc-bytecomp.elc
+  ELC      progmodes/cc-defs.elc
+  ELC      progmodes/cc-vars.elc
+  ELC      progmodes/cc-langs.elc
+  ELC      progmodes/cc-engine.elc
+  ELC      progmodes/cc-align.elc
+  ELC      progmodes/cc-awk.elc
+  ELC      progmodes/cc-cmds.elc
+  ELC      progmodes/cc-fonts.elc
+  ELC      progmodes/cc-guess.elc
+  ELC      progmodes/cc-menus.elc
+  ELC      progmodes/cc-styles.elc
+  ELC      progmodes/cc-mode.elc
+  ELC      progmodes/cfengine.elc
+  ELC      progmodes/cmacexp.elc
+  ELC      progmodes/compile.elc
+  ELC      progmodes/cperl-mode.elc
+  ELC      progmodes/cpp.elc
+  ELC      progmodes/cwarn.elc
+  ELC      progmodes/dcl-mode.elc
+  ELC      progmodes/ebnf2ps.elc
+  ELC      progmodes/ebnf-abn.elc
+  ELC      progmodes/ebnf-bnf.elc
+  ELC      progmodes/ebnf-dtd.elc
+  ELC      progmodes/ebnf-ebx.elc
+  ELC      progmodes/ebnf-iso.elc
+  ELC      progmodes/ebnf-otz.elc
+  ELC      progmodes/ebnf-yac.elc
+  ELC      progmodes/ebrowse.elc
+  ELC      progmodes/etags.elc
+  ELC      progmodes/executable.elc
+  ELC      progmodes/f90.elc
+  ELC      progmodes/flymake.elc
+  ELC      progmodes/flymake-proc.elc
+  ELC      progmodes/fortran.elc
+  ELC      progmodes/gdb-mi.elc
+  ELC      progmodes/glasses.elc
+  ELC      progmodes/grep.elc
+  ELC      progmodes/gud.elc
+  ELC      progmodes/hideif.elc
+  ELC      progmodes/hideshow.elc
+  ELC      progmodes/icon.elc
+  ELC      progmodes/idlwave.elc
+  ELC      progmodes/idlw-complete-structtag.elc
+  ELC      progmodes/idlw-help.elc
+  ELC      progmodes/idlw-shell.elc
+  ELC      progmodes/idlw-toolbar.elc
+  ELC      progmodes/inf-lisp.elc
+  ELC      progmodes/js.elc
+  ELC      progmodes/ld-script.elc
+  ELC      progmodes/m4-mode.elc
+  ELC      progmodes/make-mode.elc
+  ELC      progmodes/mantemp.elc
+  ELC      progmodes/meta-mode.elc
+  ELC      progmodes/mixal-mode.elc
+  ELC      progmodes/modula2.elc
+  ELC      progmodes/octave.elc
+  ELC      progmodes/opascal.elc
+  ELC      progmodes/pascal.elc
+  ELC      progmodes/perl-mode.elc
+  ELC      progmodes/project.elc
+  ELC      progmodes/prolog.elc
+  ELC      progmodes/ps-mode.elc
+  ELC      progmodes/python.elc
+  ELC      progmodes/ruby-mode.elc
+  ELC      progmodes/scheme.elc
+  ELC      progmodes/sh-script.elc
+  ELC      progmodes/simula.elc
+  ELC      progmodes/sql.elc
+  ELC      progmodes/subword.elc
+  ELC      progmodes/tcl.elc
+  ELC      progmodes/vera-mode.elc
+  ELC      progmodes/verilog-mode.elc
+  ELC      progmodes/vhdl-mode.elc
+  ELC      progmodes/which-func.elc
+  ELC      progmodes/xref.elc
+  ELC      progmodes/xscheme.elc
+  ELC      term/AT386.elc
+  ELC      term/bobcat.elc
+  ELC      term/cygwin.elc
+  ELC      term/iris-ansi.elc
+  ELC      term/konsole.elc
+  ELC      term/linux.elc
+  ELC      term/lk201.elc
+  ELC      term/news.elc
+  ELC      term/rxvt.elc
+  ELC      term/screen.elc
+  ELC      term/sun.elc
+  ELC      term/tmux.elc
+  ELC      term/tvi970.elc
+  ELC      term/vt100.elc
+  ELC      term/vt200.elc
+  ELC      term/w32console.elc
+  ELC      term/wyse50.elc
+  ELC      term/xterm.elc
+  ELC      textmodes/artist.elc
+  ELC      textmodes/bib-mode.elc
+  ELC      textmodes/bibtex.elc
+  ELC      textmodes/bibtex-style.elc
+  ELC      textmodes/conf-mode.elc
+  ELC      textmodes/css-mode.elc
+  ELC      textmodes/dns-mode.elc
+  ELC      textmodes/enriched.elc
+  ELC      textmodes/flyspell.elc
+  ELC      textmodes/ispell.elc
+  ELC      textmodes/less-css-mode.elc
+  ELC      textmodes/makeinfo.elc
+  ELC      textmodes/mhtml-mode.elc
+  ELC      textmodes/nroff-mode.elc
+  ELC      textmodes/page-ext.elc
+  ELC      textmodes/picture.elc
+  ELC      textmodes/po.elc
+  ELC      textmodes/refbib.elc
+  ELC      textmodes/refer.elc
+  ELC      textmodes/refill.elc
+  ELC      textmodes/reftex-auc.elc
+  ELC      textmodes/reftex-cite.elc
+  ELC      textmodes/reftex-dcr.elc
+  ELC      textmodes/reftex.elc
+  ELC      textmodes/reftex-global.elc
+  ELC      textmodes/reftex-index.elc
+  ELC      textmodes/reftex-parse.elc
+  ELC      textmodes/reftex-ref.elc
+  ELC      textmodes/reftex-sel.elc
+  ELC      textmodes/reftex-toc.elc
+  ELC      textmodes/reftex-vars.elc
+  ELC      textmodes/remember.elc
+  ELC      textmodes/rst.elc
+  ELC      textmodes/sgml-mode.elc
+  ELC      textmodes/table.elc
+  ELC      textmodes/texinfmt.elc
+  ELC      textmodes/texinfo.elc
+  ELC      textmodes/tex-mode.elc
+  ELC      textmodes/texnfo-upd.elc
+  ELC      textmodes/tildify.elc
+  ELC      textmodes/two-column.elc
+  ELC      textmodes/underline.elc
+  ELC      url/url-about.elc
+  ELC      url/url-auth.elc
+  ELC      url/url-cache.elc
+  ELC      url/url-cid.elc
+  ELC      url/url-cookie.elc
+  ELC      url/url-dav.elc
+  ELC      url/url-dired.elc
+  ELC      url/url-domsuf.elc
+  ELC      url/url.elc
+  ELC      url/url-expand.elc
+  ELC      url/url-file.elc
+  ELC      url/url-ftp.elc
+  ELC      url/url-future.elc
+  ELC      url/url-gw.elc
+  ELC      url/url-handlers.elc
+  ELC      url/url-history.elc
+  ELC      url/url-http.elc
+  ELC      url/url-imap.elc
+  ELC      url/url-irc.elc
+  ELC      url/url-ldap.elc
+  ELC      url/url-mailto.elc
+  ELC      url/url-methods.elc
+  ELC      url/url-misc.elc
+  ELC      url/url-news.elc
+  ELC      url/url-nfs.elc
+  ELC      url/url-ns.elc
+  ELC      url/url-parse.elc
+  ELC      url/url-privacy.elc
+  ELC      url/url-proxy.elc
+  ELC      url/url-queue.elc
+  ELC      url/url-tramp.elc
+  ELC      url/url-util.elc
+  ELC      url/url-vars.elc
+  ELC      vc/add-log.elc
+  ELC      vc/compare-w.elc
+  ELC      vc/cvs-status.elc
+  ELC      vc/diff.elc
+  ELC      vc/diff-mode.elc
+  ELC      vc/ediff-diff.elc
+  ELC      vc/ediff.elc
+  ELC      vc/ediff-help.elc
+  ELC      vc/ediff-init.elc
+  ELC      vc/ediff-merg.elc
+  ELC      vc/ediff-mult.elc
+  ELC      vc/ediff-ptch.elc
+  ELC      vc/ediff-util.elc
+  ELC      vc/ediff-vers.elc
+  ELC      vc/ediff-wind.elc
+  ELC      vc/emerge.elc
+  ELC      vc/log-edit.elc
+  ELC      vc/log-view.elc
+  ELC      vc/pcvs-defs.elc
+  ELC      vc/pcvs.elc
+  ELC      vc/pcvs-info.elc
+  ELC      vc/pcvs-parse.elc
+  ELC      vc/pcvs-util.elc
+  ELC      vc/smerge-mode.elc
+  ELC      vc/vc-annotate.elc
+  ELC      vc/vc-bzr.elc
+  ELC      vc/vc-cvs.elc
+  ELC      vc/vc-dav.elc
+  ELC      vc/vc-dir.elc
+  ELC      vc/vc-dispatcher.elc
+  ELC      vc/vc.elc
+  ELC      vc/vc-filewise.elc
+  ELC      vc/vc-git.elc
+  ELC      vc/vc-hg.elc
+  ELC      vc/vc-mtn.elc
+  ELC      vc/vc-rcs.elc
+  ELC      vc/vc-sccs.elc
+  ELC      vc/vc-src.elc
+  ELC      vc/vc-svn.elc
+make[2]: Leaving directory '/usr/local/src/emacs/lisp'
+make[1]: Leaving directory '/usr/local/src/emacs/lisp'
+make info-real info-dir
+make[1]: Entering directory '/usr/local/src/emacs'
+make -C doc/lispref info
+make[2]: Entering directory '/usr/local/src/emacs/doc/lispref'
+  GEN      ../../info/elisp.info
+make[2]: Leaving directory '/usr/local/src/emacs/doc/lispref'
+make -C doc/lispintro info
+make[2]: Entering directory '/usr/local/src/emacs/doc/lispintro'
+  GEN      ../../info/eintr.info
+make[2]: Leaving directory '/usr/local/src/emacs/doc/lispintro'
+make -C doc/emacs info
+make[2]: Entering directory '/usr/local/src/emacs/doc/emacs'
+  GEN      ../../info/emacs.info
+make[2]: Leaving directory '/usr/local/src/emacs/doc/emacs'
+make -C doc/misc info
+make[2]: Entering directory '/usr/local/src/emacs/doc/misc'
+  GEN      ../../info/ada-mode.info
+  GEN      ../../info/auth.info
+  GEN      ../../info/autotype.info
+  GEN      ../../info/bovine.info
+  GEN      ../../info/calc.info
+  GEN      ../../info/ccmode.info
+  GEN      ../../info/cl.info
+  GEN      ../../info/dbus.info
+  GEN      ../../info/dired-x.info
+  GEN      ../../info/ebrowse.info
+  GEN      ../../info/ede.info
+  GEN      ../../info/ediff.info
+  GEN      ../../info/edt.info
+  GEN      ../../info/eieio.info
+  GEN      ../../info/emacs-mime.info
+  GEN      ../../info/epa.info
+  GEN      ../../info/erc.info
+  GEN      ../../info/ert.info
+  GEN      ../../info/eshell.info
+  GEN      ../../info/eudc.info
+  GEN      ../../info/efaq.info
+  GEN      ../../info/eww.info
+  GEN      ../../info/flymake.info
+  GEN      ../../info/forms.info
+  GEN      ../../info/gnus.info
+  GEN      ../../info/emacs-gnutls.info
+  GEN      ../../info/htmlfontify.info
+  GEN      ../../info/idlwave.info
+  GEN      ../../info/ido.info
+  GEN      ../../info/info.info
+  GEN      ../../info/mairix-el.info
+  GEN      ../../info/message.info
+  GEN      ../../info/mh-e.info
+  GEN      ../../info/newsticker.info
+  GEN      ../../info/nxml-mode.info
+  GEN      ../../info/octave-mode.info
+  GEN      ../../info/org.info
+  GEN      ../../info/pcl-cvs.info
+  GEN      ../../info/pgg.info
+  GEN      ../../info/rcirc.info
+  GEN      ../../info/remember.info
+  GEN      ../../info/reftex.info
+  GEN      ../../info/sasl.info
+  GEN      ../../info/sc.info
+  GEN      ../../info/semantic.info
+  GEN      ../../info/ses.info
+  GEN      ../../info/sieve.info
+  GEN      ../../info/smtpmail.info
+  GEN      ../../info/speedbar.info
+  GEN      ../../info/srecode.info
+  GEN      ../../info/todo-mode.info
+  GEN      ../../info/tramp.info
+  GEN      ../../info/url.info
+  GEN      ../../info/vhdl-mode.info
+  GEN      ../../info/vip.info
+  GEN      ../../info/viper.info
+  GEN      ../../info/widget.info
+  GEN      ../../info/wisent.info
+  GEN      ../../info/woman.info
+  GEN      ../../info/efaq-w32.info
+make[2]: Leaving directory '/usr/local/src/emacs/doc/misc'
+  GEN      info/dir
+make[1]: Leaving directory '/usr/local/src/emacs'
