@@ -8007,10 +8007,12 @@ unchecked check box."
   "Insert a new subheading and demote it.
 Works for outline headings and for plain lists alike."
   (interactive "P")
-  (org-insert-heading arg)
-  (cond
-   ((org-at-heading-p) (org-do-demote))
-   ((org-at-item-p) (org-indent-item))))
+  (cond ((org-at-heading-p)
+         (org-insert-heading arg)
+         (org-do-demote))
+        ((org-at-item-p)
+         (org-insert-item arg)
+         (org-indent-item))))
 
 (defun org-insert-todo-subheading (arg)
   "Insert a new subheading with TODO keyword or checkbox and demote it.
@@ -21261,10 +21263,11 @@ an argument, unconditionally call `org-insert-heading'."
   (interactive "P")
   (org-check-before-invisible-edit 'insert)
   (or (run-hook-with-args-until-success 'org-metareturn-hook)
-      (call-interactively (cond (arg #'org-insert-heading)
-				((org-at-table-p) #'org-table-wrap-region)
+      (call-interactively (cond ((org-at-table-p) #'org-table-wrap-region)
 				((org-in-item-p) #'org-insert-item)
-				(t #'org-insert-heading)))))
+				(t #'org-insert-heading)
+                                (arg #'org-insert-heading)
+                                ))))
 
 ;;; Menu entries
 
