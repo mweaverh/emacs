@@ -4331,6 +4331,8 @@ After a match, the match groups contain these elements:
 
 (defvar org-verbatim-re nil
   "Regular expression for matching verbatim text.")
+(defvar msw/org-verbatim-emph-chars nil)
+(defvar msw/org-non-verbatim-emph-chars nil)
 
 (defvar org-emphasis-regexp-components) ; defined just below
 (defvar org-emphasis-alist) ; defined just below
@@ -4349,8 +4351,19 @@ After a match, the match groups contain these elements:
 			  "\\(\\([%%s]\\)\\([^%s]\\|[^%s]%s[^%s]\\)\\3\\)"
 			  "\\([%s]\\|$\\)") ;after markers
 		  pre border border body border post)))
-      (setq org-emph-re (format template "*/_+"))
-      (setq org-verbatim-re (format template "=~")))))
+      (setq msw/org-non-verbatim-emph-chars
+            (mapconcat 'car (seq-filter
+                             (lambda (entry) (not (eq 'verbatim (caddr entry))))
+                             org-emphasis-alist) ""))
+      (setq msw/org-verbatim-emph-chars
+            (mapconcat 'car (seq-filter
+                             (lambda (entry) (eq 'verbatim (caddr entry)))
+                             org-emphasis-alist) ""))
+      (setq org-emph-re (format template msw/org-non-verbatim-emph-chars))
+      (setq org-verbatim-re (format template msw/org-verbatim-emph-chars))
+      (message "DEBUG org-set-emph-re: org-emph-re=%s, org-verbatim-re=%s"
+               org-emph-re org-verbatim-re)
+      )))
 
 ;; This used to be a defcustom (Org <8.0) but allowing the users to
 ;; set this option proved cumbersome.  See this message/thread:
@@ -5762,12 +5775,15 @@ This should be called after the variable `org-link-parameters' has changed."
 
 (defun org-do-emphasis-faces (limit)
   "Run through the buffer and emphasize strings."
-  (let ((quick-re (format "\\([%s]\\|^\\)\\([~=*/_+]\\)"
-			  (car org-emphasis-regexp-components))))
+  (let ((quick-re (format "\\([%s]\\|^\\)\\([%s]\\)"
+			  (car org-emphasis-regexp-components)
+                          (concat msw/org-verbatim-emph-chars
+                                  msw/org-non-verbatim-emph-chars))))
     (catch :exit
       (while (re-search-forward quick-re limit t)
 	(let* ((marker (match-string 2))
-	       (verbatim? (member marker '("~" "="))))
+	       (verbatim? (member (string-to-char marker)
+                                  (string-to-list msw/org-verbatim-emph-chars))))
 	  (when (save-excursion
 		  (goto-char (match-beginning 0))
 		  (and
