@@ -5364,8 +5364,8 @@ REPORT-FN is Flymake's callback function."
 
   (add-to-list
    'hs-special-modes-alist
-   `(python-mode
-     "\\s-*\\_<\\(?:def\\|class\\)\\_>"
+   `(python-mode  ;;; msw here, this RE needs to be anchored at start of line.
+     "^\\s-*\\_<\\(?:def\\|class\\)\\_>"
      ;; Use the empty string as end regexp so it doesn't default to
      ;; "\\s)".  This way parens at end of defun are properly hidden.
      ""
