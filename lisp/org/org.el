@@ -8008,6 +8008,7 @@ unchecked check box."
 Works for outline headings and for plain lists alike."
   (interactive "P")
   (cond ((org-at-heading-p)
+         ;; msw here
          (org-insert-heading arg)
          (org-do-demote))
         ((org-at-item-p)
@@ -21263,6 +21264,7 @@ an argument, unconditionally call `org-insert-heading'."
   (interactive "P")
   (org-check-before-invisible-edit 'insert)
   (or (run-hook-with-args-until-success 'org-metareturn-hook)
+      ;; msw here
       (call-interactively (cond ((org-at-table-p) #'org-table-wrap-region)
 				((org-in-item-p) #'org-insert-item)
 				(t #'org-insert-heading)
